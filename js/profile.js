@@ -13,15 +13,8 @@ import {
   signOut,
 } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
-// Firebase config
-const firebaseConfig = {
-  apiKey: "AIzaSyBX15nrkN6mqZW09HOtneFVj6O0krWuw4I",
-  authDomain: "jobsensei-84540.firebaseapp.com",
-  projectId: "jobsensei-84540",
-  storageBucket: "jobsensei-84540.appspot.com",
-  messagingSenderId: "293854344933",
-  appId: "1:293854344933:web:227ce709e4dfdf7bc2460c",
-};
+// Import Firebase configuration from centralized config
+import { firebaseConfig } from './config.js';
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

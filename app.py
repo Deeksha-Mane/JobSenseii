@@ -1,10 +1,12 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 import numpy as np
 import pandas as pd
 import pickle
 import os
+from career_engine import CareerEngine, process_career_recommendation
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='.', static_url_path='')
+app.secret_key = 'your-secret-key-here-change-in-production'  # Required for sessions
 
 # Define the model path - use relative path for better portability
 model_path = 'career_recommendation_model.pkl'
@@ -51,31 +53,138 @@ default_explanation = "This career aligns with your personality traits and prefe
 def home():
     return render_template('index.html')
 
+@app.route('/pages/<path:filename>')
+def serve_pages(filename):
+    """Serve static HTML pages from pages folder"""
+    from flask import send_from_directory
+    return send_from_directory('pages', filename)
+
 @app.route('/quiz')
 def quiz():
     questions = [
         "I enjoy solving complex logical and mathematical problems",
-        "I find satisfaction in helping others overcome difficulties",
-        "I like creating things with my hands or physical tools",
-        "I prefer creative and artistic activities",
-        "I'm interested in how businesses operate and generate profit",
-        "I enjoy understanding how technology and complex systems work",
-        "I like studying natural systems and living organisms",
-        "I'm comfortable working with and analyzing large amounts of data",
-        "I like environments that are structured and organized",
-        "I prefer working independently with minimal oversight",
-        "I thrive in collaborative, team-oriented settings",
-        "I enjoy leading projects and coordinating others' work",
-        "I like roles that require precise attention to detail",
-        "I enjoy fast-paced environments with changing priorities",
-        "I'm interested in understanding human behavior and psychology",
-        "I enjoy communicating ideas through presentations or teaching",
-        "I prefer work that contributes directly to society's well-being",
-        "I'm motivated by challenges and achieving difficult goals",
-        "I value work-life balance over career advancement",
-        "I enjoy taking calculated risks and making important decisions"
+        "I can work on the same task consistently for long periods",
+        "I prefer structured, step-by-step approaches to problem-solving",
+        "I get frustrated when requirements keep changing",
+        "I enjoy creating visual designs and user interfaces",
+        "I like experimenting with new ideas and approaches",
+        "I prefer seeing quick results from my work",
+        "I'm comfortable with ambiguous or unclear requirements",
+        "I can maintain focus on long-term goals without immediate rewards",
+        "I enjoy learning new technologies independently",
+        "I prefer detailed documentation and clear instructions",
+        "I'm comfortable making decisions with incomplete information",
+        "I can stay motivated even when progress is slow",
+        "I enjoy teaching or explaining concepts to others",
+        "I prefer working on one project deeply rather than multiple projects",
+        "I'm comfortable with trial-and-error learning",
+        "I enjoy optimizing and improving existing systems",
+        "I prefer creative freedom over following strict guidelines",
+        "I'm patient with debugging and troubleshooting",
+        "I enjoy competitive environments and challenges"
     ]
     return render_template('quiz.html', questions=questions)
+
+@app.route('/career-guide')
+def career_guide():
+    """New career guide intake form"""
+    return render_template('career_guide.html')
+
+@app.route('/process-career-guide', methods=['POST'])
+def process_career_guide():
+    """Process career guide form and generate recommendations"""
+    try:
+        # Get MCQ responses
+        mcq_responses = [int(request.form.get(f'Q{i+1}', 3)) for i in range(20)]
+        
+        # Get constraints
+        constraints = {
+            "time_per_week": int(request.form.get('time_per_week', 10)),
+            "academic_year": request.form.get('academic_year', 'year2'),
+            "financial": request.form.get('financial', 'medium'),
+            "internet": request.form.get('internet', 'yes') == 'yes',
+            "device": request.form.get('device', 'laptop')
+        }
+        
+        # Get interest and experience
+        interest = request.form.get('interest', 'internship')
+        experience_level = request.form.get('experience_level', 'beginner')
+        
+        # Process recommendation
+        result = process_career_recommendation(
+            mcq_responses,
+            constraints,
+            interest,
+            experience_level
+        )
+        
+        # Store in session for commitment page
+        session['career_recommendation'] = result
+        session['experience_level'] = experience_level
+        
+        return render_template('career_recommendation.html', result=result)
+        
+    except Exception as e:
+        error_message = f"Error processing career guide: {str(e)}"
+        print(error_message)
+        return render_template('career_recommendation.html', error=error_message)
+
+@app.route('/commit-path', methods=['POST'])
+def commit_path():
+    """Handle 90-day commitment"""
+    try:
+        chosen_path = request.form.get('chosen_path', 'primary')
+        result = session.get('career_recommendation')
+        
+        if not result:
+            return redirect(url_for('career_guide'))
+        
+        # Get the chosen path details
+        if chosen_path == 'primary':
+            path = result['primary_path']
+        else:
+            path = result['secondary_path']
+        
+        # Store commitment
+        session['active_career_path'] = {
+            "path_key": path['key'],
+            "path_name": path['name'],
+            "committed_date": result['timestamp'],
+            "current_week": 1,
+            "current_phase": "Foundation"
+        }
+        
+        # Generate roadmap for chosen path
+        engine = CareerEngine()
+        experience_level = session.get('experience_level', 'beginner')
+        constraints = result['roadmap']['time_commitment']
+        time_per_week = int(constraints.split()[0])
+        
+        roadmap = engine.generate_roadmap(path['key'], experience_level, time_per_week)
+        session['roadmap'] = roadmap
+        
+        return render_template('roadmap.html', 
+                             path=path, 
+                             roadmap=roadmap,
+                             commitment=session['active_career_path'])
+        
+    except Exception as e:
+        error_message = f"Error committing to path: {str(e)}"
+        print(error_message)
+        return redirect(url_for('career_guide'))
+
+@app.route('/my-roadmap')
+def my_roadmap():
+    """View current roadmap"""
+    roadmap = session.get('roadmap')
+    commitment = session.get('active_career_path')
+    
+    if not roadmap or not commitment:
+        return redirect(url_for('career_guide'))
+    
+    return render_template('roadmap.html', 
+                         roadmap=roadmap,
+                         commitment=commitment)
 
 @app.route('/predict', methods=['POST'])
 def predict():

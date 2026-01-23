@@ -1,137 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Step 6: Volunteer Experience | Resume Builder</title>
-    <link rel="stylesheet" href="../css/resumestep6.css" />
-  </head>
-  <body>
-    <div class="container">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Step 6: Certifications - Resume Builder</title>
+  <link rel="icon" href="/assets/images/Jobsensei.png" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="/css/homepage.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <link rel="stylesheet" href="/css/resume-steps.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <img src="/assets/images/logo.svg" alt="JobSensei Logo" class="sidebar-logo" />
+      <h2>JobSensei</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="/pages/homepage.html"><i class="fas fa-home"></i> Home</a>
+      <a href="/pages/dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+      <a href="/pages/profile.html"><i class="fas fa-user"></i> My Profile</a>
+      <a href="/pages/jobboard.html"><i class="fas fa-briefcase"></i> Jobs For You</a>
+      <a href="/career-guide"><i class="fas fa-robot"></i> AI Career Guide</a>
+      <a href="/pages/resumeintro.html" class="active"><i class="fas fa-file-alt"></i> Resume Builder</a>
+      <a href="/pages/chatbot.html"><i class="fas fa-comments"></i> Ask Yuki Bot</a>
+      <a href="/pages/connect.html"><i class="fas fa-users"></i> Connect</a>
+      <a href="/pages/saved-courses.html"><i class="fas fa-bookmark"></i> Saved Courses</a>
+    </nav>
+  </aside>
+
+  <main class="step-main">
+    <div class="step-wrapper">
       <div class="progress-container">
-        <div class="progress-bar">
-          <div class="progress-fill"></div>
+        <div class="progress-header">
+          <span class="progress-title">Resume Building Progress</span>
+          <span class="progress-percentage">75%</span>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" style="width: 75%;"></div>
         </div>
         <div class="progress-steps">
-          <span class="step-label">Personal Info</span>
-          <span class="step-label">Summary</span>
-          <span class="step-label">Experience</span>
-          <span class="step-label">Education</span>
-          <span class="step-label">Skills</span>
-          <span class="step-label active">Volunteer</span>
-          <span class="step-label">Certifications</span>
+          <div class="progress-step completed"><div class="progress-step-circle"><i class="fas fa-check"></i></div><span class="progress-step-label">Personal</span></div>
+          <div class="progress-step completed"><div class="progress-step-circle"><i class="fas fa-check"></i></div><span class="progress-step-label">Education</span></div>
+          <div class="progress-step completed"><div class="progress-step-circle"><i class="fas fa-check"></i></div><span class="progress-step-label">Experience</span></div>
+          <div class="progress-step completed"><div class="progress-step-circle"><i class="fas fa-check"></i></div><span class="progress-step-label">Skills</span></div>
+          <div class="progress-step completed"><div class="progress-step-circle"><i class="fas fa-check"></i></div><span class="progress-step-label">Projects</span></div>
+          <div class="progress-step active"><div class="progress-step-circle">6</div><span class="progress-step-label">Certifications</span></div>
+          <div class="progress-step"><div class="progress-step-circle">7</div><span class="progress-step-label">Summary</span></div>
+          <div class="progress-step"><div class="progress-step-circle">8</div><span class="progress-step-label">Preview</span></div>
         </div>
       </div>
 
       <div class="form-container">
-        <h1>Step 6: Volunteer Experience</h1>
-        <p class="section-description">
-          Add your volunteer work to showcase your community involvement and
-          leadership skills.
-        </p>
+        <div class="form-header">
+          <h1><i class="fas fa-certificate"></i> Certifications & Achievements</h1>
+          <p>Add your certifications, awards, and notable achievements to stand out.</p>
+        </div>
 
-        <form id="volunteer-form">
-          <div id="volunteer-container">
-            <div class="volunteer-entry">
-              <div class="volunteer-header">
-                <h3>Volunteer Experience #1</h3>
-                <button
-                  type="button"
-                  class="btn-remove"
-                  onclick="this.closest('.volunteer-entry').remove()"
-                >
-                  Remove
-                </button>
-              </div>
+        <form id="certifications-form">
+          <div class="dynamic-section">
+            <div class="section-header">
+              <h3><i class="fas fa-award"></i> Certification Entries</h3>
+              <button type="button" class="add-btn" onclick="addCertification()">
+                <i class="fas fa-plus"></i> Add Certification
+              </button>
+            </div>
 
-              <div class="form-group">
-                <label for="organization-1">Organization Name</label>
-                <input
-                  type="text"
-                  name="organization"
-                  id="organization-1"
-                  required
-                  placeholder="Enter organization name"
-                />
-              </div>
-
-              <div class="form-group">
-                <label for="role-1">Role/Position</label>
-                <input
-                  type="text"
-                  name="role"
-                  id="role-1"
-                  required
-                  placeholder="Enter your role/position"
-                />
-              </div>
-
-              <div class="form-group">
-                <label for="description-1">Description</label>
-                <textarea
-                  name="description"
-                  id="description-1"
-                  required
-                  placeholder="Describe your responsibilities and achievements"
-                  rows="4"
-                ></textarea>
-              </div>
-
-              <div class="form-row">
+            <div id="certification-entries">
+              <div class="entry-card">
+                <button type="button" class="remove-btn" onclick="removeEntry(this)" style="display: none;"><i class="fas fa-times"></i></button>
+                
                 <div class="form-group">
-                  <label for="start-date-1">Start Date</label>
-                  <input
-                    type="month"
-                    name="start-date"
-                    id="start-date-1"
-                    required
-                  />
+                  <label><i class="fas fa-certificate"></i> Certification Name *</label>
+                  <input type="text" name="certName[]" placeholder="e.g., AWS Certified Solutions Architect" required>
                 </div>
 
-                <div class="form-group">
-                  <label for="end-date-1">End Date</label>
-                  <input type="month" name="end-date" id="end-date-1" />
-                  <label class="checkbox-label">
-                    <input type="checkbox" name="ongoing" id="ongoing-1" />
-                    Ongoing
-                  </label>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label><i class="fas fa-building"></i> Issuing Organization *</label>
+                    <input type="text" name="issuer[]" placeholder="e.g., Amazon Web Services" required>
+                  </div>
+                  <div class="form-group">
+                    <label><i class="fas fa-calendar"></i> Issue Date</label>
+                    <input type="month" name="issueDate[]">
+                  </div>
                 </div>
-              </div>
 
-              <div class="form-group">
-                <label for="skills-1">Skills Gained</label>
-                <input
-                  type="text"
-                  name="skills"
-                  id="skills-1"
-                  placeholder="e.g., Leadership, Event Planning, Communication"
-                />
+                <div class="form-row">
+                  <div class="form-group">
+                    <label><i class="fas fa-id-card"></i> Credential ID</label>
+                    <input type="text" name="credentialId[]" placeholder="e.g., ABC123XYZ">
+                  </div>
+                  <div class="form-group">
+                    <label><i class="fas fa-external-link-alt"></i> Credential URL</label>
+                    <input type="url" name="credentialUrl[]" placeholder="https://verify.example.com">
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          <div id="volunteer-validation" class="validation-message"></div>
-
-          <button type="button" onclick="addVolunteerEntry()" class="btn-add">
-            + Add Another Volunteer Experience
-          </button>
-
           <div class="button-group">
-            <button
-              type="button"
-              class="btn-back"
-              onclick="window.location.href='resumestep5.html'"
-            >
-              <span class="arrow">←</span> Back
+            <button type="button" class="btn-prev" onclick="window.location.href='resumestep5.html'">
+              <i class="fas fa-arrow-left"></i> Previous
             </button>
             <button type="submit" class="btn-next">
-              Continue <span class="arrow">→</span>
+              Next <i class="fas fa-arrow-right"></i>
             </button>
           </div>
         </form>
       </div>
     </div>
+  </main>
 
-    <script src="../js/resumestep6.js"></script>
-  </body>
+  <script src="/js/homepage-enhanced.js"></script>
+  <script>
+    let certCount = 1;
+    function addCertification() {
+      certCount++;
+      const container = document.getElementById('certification-entries');
+      const newEntry = document.createElement('div');
+      newEntry.className = 'entry-card';
+      newEntry.innerHTML = `
+        <button type="button" class="remove-btn" onclick="removeEntry(this)"><i class="fas fa-times"></i></button>
+        <div class="form-group">
+          <label><i class="fas fa-certificate"></i> Certification Name *</label>
+          <input type="text" name="certName[]" placeholder="e.g., AWS Certified Solutions Architect" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label><i class="fas fa-building"></i> Issuing Organization *</label>
+            <input type="text" name="issuer[]" placeholder="e.g., Amazon Web Services" required>
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-calendar"></i> Issue Date</label>
+            <input type="month" name="issueDate[]">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label><i class="fas fa-id-card"></i> Credential ID</label>
+            <input type="text" name="credentialId[]" placeholder="e.g., ABC123XYZ">
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-external-link-alt"></i> Credential URL</label>
+            <input type="url" name="credentialUrl[]" placeholder="https://verify.example.com">
+          </div>
+        </div>
+      `;
+      container.appendChild(newEntry);
+      if (certCount > 1) {
+        const firstEntry = container.querySelector('.entry-card:first-child .remove-btn');
+        if (firstEntry) firstEntry.style.display = 'flex';
+      }
+    }
+    function removeEntry(button) {
+      button.closest('.entry-card').remove();
+      certCount--;
+      if (certCount === 1) {
+        const firstEntry = document.querySelector('#certification-entries .entry-card:first-child .remove-btn');
+        if (firstEntry) firstEntry.style.display = 'none';
+      }
+    }
+    document.getElementById('certifications-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      localStorage.setItem('resumeCertifications', JSON.stringify(Object.fromEntries(formData)));
+      window.location.href = 'resumestep7.html';
+    });
+  </script>
+</body>
 </html>

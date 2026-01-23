@@ -1,30 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Step 4: Skills | Resume Builder</title>
-  <link rel="stylesheet" href="../css/resumestep4.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Step 4: Skills - Resume Builder</title>
+  <link rel="icon" href="/assets/images/Jobsensei.png" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="/css/homepage.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <link rel="stylesheet" href="/css/resume-steps.css" />
 </head>
 <body>
-  <div class="container">
-    <div class="form-container">
-      <h1>Step 4: Skills</h1>
-      <form id="skills-form">
-        <div class="form-group">
-          <label for="skillInput">Enter a Skill</label>
-          <input type="text" id="skillInput" placeholder="e.g. JavaScript, Python" />
-          <button type="button" class="btn-add-skill" onclick="addSkill()">Add Skill</button>
-        </div>
-        <div id="skills-list" class="skills-list">
-          <!-- Added skills will appear here -->
-        </div>
-        <div class="button-group">
-          <button type="submit" class="btn-next">Next</button>
-        </div>
-      </form>
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <img src="/assets/images/logo.svg" alt="JobSensei Logo" class="sidebar-logo" />
+      <h2>JobSensei</h2>
     </div>
-  </div>
-  <script src="/js/resumestep4.js"></script>
+    <nav class="sidebar-nav">
+      <a href="/pages/homepage.html"><i class="fas fa-home"></i> Home</a>
+      <a href="/pages/dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+      <a href="/pages/profile.html"><i class="fas fa-user"></i> My Profile</a>
+      <a href="/pages/jobboard.html"><i class="fas fa-briefcase"></i> Jobs For You</a>
+      <a href="/career-guide"><i class="fas fa-robot"></i> AI Career Guide</a>
+      <a href="/pages/resumeintro.html" class="active"><i class="fas fa-file-alt"></i> Resume Builder</a>
+      <a href="/pages/chatbot.html"><i class="fas fa-comments"></i> Ask Yuki Bot</a>
+      <a href="/pages/connect.html"><i class="fas fa-users"></i> Connect</a>
+      <a href="/pages/saved-courses.html"><i class="fas fa-bookmark"></i> Saved Courses</a>
+    </nav>
+  </aside>
+
+  <main class="step-main">
+    <div class="step-wrapper">
+      <div class="progress-container">
+        <div class="progress-header">
+          <span class="progress-title">Resume Building Progress</span>
+          <span class="progress-percentage">50%</span>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" style="width: 50%;"></div>
+        </div>
+        <div class="progress-steps">
+          <div class="progress-step completed"><div class="progress-step-circle"><i class="fas fa-check"></i></div><span class="progress-step-label">Personal</span></div>
+          <div class="progress-step completed"><div class="progress-step-circle"><i class="fas fa-check"></i></div><span class="progress-step-label">Education</span></div>
+          <div class="progress-step completed"><div class="progress-step-circle"><i class="fas fa-check"></i></div><span class="progress-step-label">Experience</span></div>
+          <div class="progress-step active"><div class="progress-step-circle">4</div><span class="progress-step-label">Skills</span></div>
+          <div class="progress-step"><div class="progress-step-circle">5</div><span class="progress-step-label">Projects</span></div>
+          <div class="progress-step"><div class="progress-step-circle">6</div><span class="progress-step-label">Certifications</span></div>
+          <div class="progress-step"><div class="progress-step-circle">7</div><span class="progress-step-label">Summary</span></div>
+          <div class="progress-step"><div class="progress-step-circle">8</div><span class="progress-step-label">Preview</span></div>
+        </div>
+      </div>
+
+      <div class="form-container">
+        <div class="form-header">
+          <h1><i class="fas fa-code"></i> Skills</h1>
+          <p>List your technical and soft skills. Organize them by category for better readability.</p>
+        </div>
+
+        <form id="skills-form">
+          <div class="form-group">
+            <label><i class="fas fa-laptop-code"></i> Technical Skills *</label>
+            <textarea name="technicalSkills" placeholder="e.g., JavaScript, Python, React, Node.js, SQL, Git" rows="3" required></textarea>
+            <small style="color: var(--text-secondary); font-size: 0.85rem;">Separate skills with commas</small>
+          </div>
+
+          <div class="form-group">
+            <label><i class="fas fa-tools"></i> Tools & Technologies</label>
+            <textarea name="tools" placeholder="e.g., VS Code, Docker, AWS, Figma, Jira" rows="3"></textarea>
+            <small style="color: var(--text-secondary); font-size: 0.85rem;">Separate with commas</small>
+          </div>
+
+          <div class="form-group">
+            <label><i class="fas fa-language"></i> Programming Languages</label>
+            <textarea name="languages" placeholder="e.g., JavaScript, Python, Java, C++, TypeScript" rows="2"></textarea>
+            <small style="color: var(--text-secondary); font-size: 0.85rem;">Separate with commas</small>
+          </div>
+
+          <div class="form-group">
+            <label><i class="fas fa-database"></i> Databases & Frameworks</label>
+            <textarea name="frameworks" placeholder="e.g., MongoDB, PostgreSQL, Express.js, Django, React Native" rows="2"></textarea>
+            <small style="color: var(--text-secondary); font-size: 0.85rem;">Separate with commas</small>
+          </div>
+
+          <div class="form-group">
+            <label><i class="fas fa-users-cog"></i> Soft Skills</label>
+            <textarea name="softSkills" placeholder="e.g., Team Leadership, Communication, Problem Solving, Time Management" rows="2"></textarea>
+            <small style="color: var(--text-secondary); font-size: 0.85rem;">Separate with commas</small>
+          </div>
+
+          <div class="button-group">
+            <button type="button" class="btn-prev" onclick="window.location.href='resumestep3.html'">
+              <i class="fas fa-arrow-left"></i> Previous
+            </button>
+            <button type="submit" class="btn-next">
+              Next <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script src="/js/homepage-enhanced.js"></script>
+  <script>
+    document.getElementById('skills-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      localStorage.setItem('resumeSkills', JSON.stringify(Object.fromEntries(formData)));
+      window.location.href = 'resumestep5.html';
+    });
+  </script>
 </body>
 </html>

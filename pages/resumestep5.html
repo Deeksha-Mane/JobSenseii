@@ -1,42 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Step 5: Projects | Resume Builder</title>
-  <link rel="stylesheet" href="/css/resumestep5.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Step 5: Projects - Resume Builder</title>
+  <link rel="icon" href="/assets/images/Jobsensei.png" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="/css/homepage.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <link rel="stylesheet" href="/css/resume-steps.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Step 5: Add Your Projects</h1>
-    <form id="projectForm">
-      <div class="project-input">
-        <label>Project Title</label>
-        <input type="text" name="title" placeholder="e.g. Portfolio Website" required />
-      </div>
-
-      <div class="project-input">
-        <label>Description</label>
-        <textarea name="description" rows="3" placeholder="Briefly describe your project..." required></textarea>
-      </div>
-
-      <div class="project-input">
-        <label>Technologies Used</label>
-        <input type="text" name="technologies" placeholder="e.g. HTML, CSS, JavaScript" required />
-      </div>
-
-      <button type="submit" class="btn-add">Add Project</button>
-    </form>
-
-    <div id="projectList"></div>
-
-    <div class="navigation-buttons">
-      <a href="/pages/resumestep4.html" class="nav-btn">← Back</a>
-      <a href="/pages/resumepreview.html" class="nav-btn">Next →</a>
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <img src="/assets/images/logo.svg" alt="JobSensei Logo" class="sidebar-logo" />
+      <h2>JobSensei</h2>
     </div>
-  </div>
+    <nav class="sidebar-nav">
+      <a href="/pages/homepage.html"><i class="fas fa-home"></i> Home</a>
+      <a href="/pages/dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+      <a href="/pages/profile.html"><i class="fas fa-user"></i> My Profile</a>
+      <a href="/pages/jobboard.html"><i class="fas fa-briefcase"></i> Jobs For You</a>
+      <a href="/career-guide"><i class="fas fa-robot"></i> AI Career Guide</a>
+      <a href="/pages/resumeintro.html" class="active"><i class="fas fa-file-alt"></i> Resume Builder</a>
+      <a href="/pages/chatbot.html"><i class="fas fa-comments"></i> Ask Yuki Bot</a>
+      <a href="/pages/connect.html"><i class="fas fa-users"></i> Connect</a>
+      <a href="/pages/saved-courses.html"><i class="fas fa-bookmark"></i> Saved Courses</a>
+    </nav>
+  </aside>
 
-  <script src="/js/resumestep5.js"></script>
+  <main class="step-main">
+    <div class="step-wrapper">
+      <div class="progress-container">
+        <div class="progress-header">
+          <span class="progress-title">Resume Building Progress</span>
+          <span class="progress-percentage">62.5%</span>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" style="width: 62.5%;"></div>
+        </div>
+        <div class="progress-steps">
+          <div class="progress-step completed"><div class="progress-step-circle"><i class="fas fa-check"></i></div><span class="progress-step-label">Personal</span></div>
+          <div class="progress-step completed"><div class="progress-step-circle"><i class="fas fa-check"></i></div><span class="progress-step-label">Education</span></div>
+          <div class="progress-step completed"><div class="progress-step-circle"><i class="fas fa-check"></i></div><span class="progress-step-label">Experience</span></div>
+          <div class="progress-step completed"><div class="progress-step-circle"><i class="fas fa-check"></i></div><span class="progress-step-label">Skills</span></div>
+          <div class="progress-step active"><div class="progress-step-circle">5</div><span class="progress-step-label">Projects</span></div>
+          <div class="progress-step"><div class="progress-step-circle">6</div><span class="progress-step-label">Certifications</span></div>
+          <div class="progress-step"><div class="progress-step-circle">7</div><span class="progress-step-label">Summary</span></div>
+          <div class="progress-step"><div class="progress-step-circle">8</div><span class="progress-step-label">Preview</span></div>
+        </div>
+      </div>
+
+      <div class="form-container">
+        <div class="form-header">
+          <h1><i class="fas fa-project-diagram"></i> Projects</h1>
+          <p>Showcase your best projects. Include personal, academic, or professional work.</p>
+        </div>
+
+        <form id="projects-form">
+          <div class="dynamic-section">
+            <div class="section-header">
+              <h3><i class="fas fa-folder-open"></i> Project Entries</h3>
+              <button type="button" class="add-btn" onclick="addProject()">
+                <i class="fas fa-plus"></i> Add Project
+              </button>
+            </div>
+
+            <div id="project-entries">
+              <div class="entry-card">
+                <button type="button" class="remove-btn" onclick="removeEntry(this)" style="display: none;"><i class="fas fa-times"></i></button>
+                
+                <div class="form-group">
+                  <label><i class="fas fa-heading"></i> Project Name *</label>
+                  <input type="text" name="projectName[]" placeholder="e.g., E-Commerce Website" required>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label><i class="fas fa-code-branch"></i> Technologies Used *</label>
+                    <input type="text" name="technologies[]" placeholder="e.g., React, Node.js, MongoDB" required>
+                  </div>
+                  <div class="form-group">
+                    <label><i class="fas fa-link"></i> Project Link</label>
+                    <input type="url" name="projectLink[]" placeholder="https://github.com/username/project">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label><i class="fas fa-align-left"></i> Project Description *</label>
+                  <textarea name="projectDesc[]" placeholder="• Built a full-stack e-commerce platform&#10;• Implemented user authentication and payment gateway&#10;• Achieved 1000+ active users" rows="4" required></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="button-group">
+            <button type="button" class="btn-prev" onclick="window.location.href='resumestep4.html'">
+              <i class="fas fa-arrow-left"></i> Previous
+            </button>
+            <button type="submit" class="btn-next">
+              Next <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script src="/js/homepage-enhanced.js"></script>
+  <script>
+    let projCount = 1;
+    function addProject() {
+      projCount++;
+      const container = document.getElementById('project-entries');
+      const newEntry = document.createElement('div');
+      newEntry.className = 'entry-card';
+      newEntry.innerHTML = `
+        <button type="button" class="remove-btn" onclick="removeEntry(this)"><i class="fas fa-times"></i></button>
+        <div class="form-group">
+          <label><i class="fas fa-heading"></i> Project Name *</label>
+          <input type="text" name="projectName[]" placeholder="e.g., E-Commerce Website" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label><i class="fas fa-code-branch"></i> Technologies Used *</label>
+            <input type="text" name="technologies[]" placeholder="e.g., React, Node.js, MongoDB" required>
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-link"></i> Project Link</label>
+            <input type="url" name="projectLink[]" placeholder="https://github.com/username/project">
+          </div>
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-align-left"></i> Project Description *</label>
+          <textarea name="projectDesc[]" placeholder="• Built a full-stack e-commerce platform&#10;• Implemented user authentication and payment gateway&#10;• Achieved 1000+ active users" rows="4" required></textarea>
+        </div>
+      `;
+      container.appendChild(newEntry);
+      if (projCount > 1) {
+        const firstEntry = container.querySelector('.entry-card:first-child .remove-btn');
+        if (firstEntry) firstEntry.style.display = 'flex';
+      }
+    }
+    function removeEntry(button) {
+      button.closest('.entry-card').remove();
+      projCount--;
+      if (projCount === 1) {
+        const firstEntry = document.querySelector('#project-entries .entry-card:first-child .remove-btn');
+        if (firstEntry) firstEntry.style.display = 'none';
+      }
+    }
+    document.getElementById('projects-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      localStorage.setItem('resumeProjects', JSON.stringify(Object.fromEntries(formData)));
+      window.location.href = 'resumestep6.html';
+    });
+  </script>
 </body>
 </html>
- 

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Career Guide - JobSensei</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+    :root {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --text-primary: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --accent-light: rgba(59, 130, 246, 0.1);
+      --card-bg: rgba(30, 41, 59, 0.5);
+      --card-border: rgba(148, 163, 184, 0.1);
+      --shadow: rgba(0, 0, 0, 0.3);
+    }
+
+    body.light-mode {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-light: rgba(37, 99, 235, 0.1);
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --card-border: rgba(148, 163, 184, 0.2);
+      --shadow: rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-secondary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 260px;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border-right: 1px solid var(--card-border);
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      padding: 1.25rem 0;
+      overflow-y: auto;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0 1.5rem 1rem;
+      border-bottom: 1px solid var(--card-border);
+      margin-bottom: 1rem;
+    }
+
+    .sidebar-logo {
+      width: 35px;
+      height: 35px;
+    }
+
+    .sidebar-brand h2 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin: 0;
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      padding: 0 0.75rem;
+      flex: 1;
+    }
+
+    .sidebar-nav a {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.65rem 0.85rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-radius: 0.65rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      font-size: 0.875rem;
+    }
+
+    .sidebar-nav a:hover {
+      background: var(--accent-light);
+      color: var(--accent);
+      transform: translateX(5px);
+    }
+
+    .sidebar-nav a.active {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+    }
+
+    .sidebar-nav a i {
+      font-size: 1rem;
+      width: 18px;
+      text-align: center;
+    }
+
+    /* Main Content */
+    .dashboard-main {
+      margin-left: 260px;
+      min-height: 100vh;
+      background: var(--bg-primary);
+      padding: 1.5rem 2%;
+      padding-bottom: 2rem;
+    }
+
+    .career-guide-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .guide-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .guide-header h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .guide-header p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .form-section {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--card-border);
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .form-section h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .form-section h2 i {
+      color: var(--accent);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .form-group select,
+    .form-group input {
+      padding: 0.75rem 1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--card-border);
+      border-radius: 0.5rem;
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-group select:focus,
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-light);
+    }
+
+    .question-item {
+      margin-bottom: 1.5rem;
+      padding: 1.25rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--card-border);
+      border-radius: 0.75rem;
+    }
+
+    .question-text {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .rating-scale {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .rating-option {
+      flex: 1;
+      position: relative;
+    }
+
+    .rating-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+    }
+
+    .rating-option label {
+      display: block;
+      padding: 0.75rem;
+      text-align: center;
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .rating-option input[type="radio"]:checked + label {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    .rating-option label:hover {
+      border-color: var(--accent);
+    }
+
+    .submit-section {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .submit-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 3rem;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 0.75rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+    }
+
+    .submit-btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(59, 130, 246, 0.4);
+    }
+
+    .progress-indicator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--bg-secondary);
+      z-index: 1001;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: var(--accent);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 1px solid var(--card-border);
+      }
+
+      .dashboard-main {
+        margin-left: 0;
+      }
+
+      .rating-scale {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress-indicator">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <h2>JobSensei</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="/pages/homepage.html"><i class="fas fa-home"></i> Home</a>
+      <a href="/pages/dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+      <a href="/pages/profile.html"><i class="fas fa-user"></i> My Profile</a>
+      <a href="/career-guide" class="active"><i class="fas fa-compass"></i> AI Career Guide</a>
+      <a href="/pages/jobboard.html"><i class="fas fa-briefcase"></i> Jobs For You</a>
+      <a href="/pages/resumeintro.html"><i class="fas fa-file-alt"></i> Resume Builder</a>
+      <a href="/pages/chatbot.html"><i class="fas fa-robot"></i> Ask Yuki Bot</a>
+      <a href="/pages/connect.html"><i class="fas fa-users"></i> Connect</a>
+      <a href="/pages/saved-courses.html"><i class="fas fa-bookmark"></i> Saved Courses</a>
+    </nav>
+  </aside>
+
+  <main class="dashboard-main">
+    <div class="career-guide-container">
+    <div class="guide-header">
+      <h1>🎯 AI Career Guide</h1>
+      <p>This is not a chatbot. This is a decision-making system that will diagnose your profile, recommend exactly 2 career paths, and generate a structured 90-day roadmap. Be honest with your responses.</p>
+    </div>
+
+    <form id="careerGuideForm" method="POST" action="/process-career-guide">
+      <!-- Constraints Section -->
+      <div class="form-section">
+        <h2><i class="fas fa-sliders-h"></i> Your Constraints</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="time_per_week">Time Available (hours/week) *</label>
+            <input type="number" id="time_per_week" name="time_per_week" min="5" max="40" value="10" required>
+          </div>
+          <div class="form-group">
+            <label for="academic_year">Academic Year *</label>
+            <select id="academic_year" name="academic_year" required>
+              <option value="year1">1st Year</option>
+              <option value="year2" selected>2nd Year</option>
+              <option value="year3">3rd Year</option>
+              <option value="year4">4th Year</option>
+              <option value="graduated">Graduated</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="financial">Financial Situation *</label>
+            <select id="financial" name="financial" required>
+              <option value="low">Limited Budget</option>
+              <option value="medium" selected>Moderate Budget</option>
+              <option value="high">Flexible Budget</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="internet">Reliable Internet? *</label>
+            <select id="internet" name="internet" required>
+              <option value="yes" selected>Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="device">Primary Device *</label>
+            <select id="device" name="device" required>
+              <option value="laptop" selected>Laptop</option>
+              <option value="desktop">Desktop</option>
+              <option value="mobile">Mobile Only</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="interest">Short-term Goal *</label>
+            <select id="interest" name="interest" required>
+              <option value="internship" selected>Get Internship</option>
+              <option value="job">Get Full-time Job</option>
+              <option value="skill_building">Build Skills</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="experience_level">Experience Level *</label>
+            <select id="experience_level" name="experience_level" required>
+              <option value="beginner" selected>Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Psychometric Questions -->
+      <div class="form-section">
+        <h2><i class="fas fa-brain"></i> Psychometric Assessment (20 Questions)</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Rate each statement honestly from 1 (Strongly Disagree) to 5 (Strongly Agree)</p>
+        
+        <div id="questionsContainer"></div>
+      </div>
+
+      <div class="submit-section">
+        <button type="submit" class="submit-btn">
+          <i class="fas fa-rocket"></i>
+          <span>Generate My Career Path</span>
+        </button>
+      </div>
+    </form>
+    </div>
+  </main>
+
+  <script>
+    const questions = [
+      "I enjoy solving complex logical and mathematical problems",
+      "I can work on the same task consistently for long periods",
+      "I prefer structured, step-by-step approaches to problem-solving",
+      "I get frustrated when requirements keep changing",
+      "I enjoy creating visual designs and user interfaces",
+      "I like experimenting with new ideas and approaches",
+      "I prefer seeing quick results from my work",
+      "I'm comfortable with ambiguous or unclear requirements",
+      "I can maintain focus on long-term goals without immediate rewards",
+      "I enjoy learning new technologies independently",
+      "I prefer detailed documentation and clear instructions",
+      "I'm comfortable making decisions with incomplete information",
+      "I can stay motivated even when progress is slow",
+      "I enjoy teaching or explaining concepts to others",
+      "I prefer working on one project deeply rather than multiple projects",
+      "I'm comfortable with trial-and-error learning",
+      "I enjoy optimizing and improving existing systems",
+      "I prefer creative freedom over following strict guidelines",
+      "I'm patient with debugging and troubleshooting",
+      "I enjoy competitive environments and challenges"
+    ];
+
+    const container = document.getElementById('questionsContainer');
+    const progressBar = document.getElementById('progressBar');
+
+    questions.forEach((question, index) => {
+      const questionDiv = document.createElement('div');
+      questionDiv.className = 'question-item';
+      questionDiv.innerHTML = `
+        <div class="question-text">Q${index + 1}. ${question}</div>
+        <div class="rating-scale">
+          ${[1, 2, 3, 4, 5].map(value => `
+            <div class="rating-option">
+              <input type="radio" id="Q${index + 1}_${value}" name="Q${index + 1}" value="${value}" required>
+              <label for="Q${index + 1}_${value}">${value}</label>
+            </div>
+          `).join('')}
+        </div>
+      `;
+      container.appendChild(questionDiv);
+    });
+
+    // Update progress bar on scroll
+    window.addEventListener('scroll', () => {
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight - windowHeight;
+      const scrolled = window.scrollY;
+      const progress = (scrolled / documentHeight) * 100;
+      progressBar.style.width = progress + '%';
+    });
+
+    // Form validation
+    document.getElementById('careerGuideForm').addEventListener('submit', (e) => {
+      const allAnswered = questions.every((_, index) => {
+        return document.querySelector(`input[name="Q${index + 1}"]:checked`);
+      });
+
+      if (!allAnswered) {
+        e.preventDefault();
+        alert('Please answer all 20 questions before submitting.');
+      }
+    });
+  </script>
+</body>
+</html>

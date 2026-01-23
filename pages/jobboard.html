@@ -3,149 +3,146 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jobs For You | JobSensei</title>
-    <link rel="stylesheet" href="/css/jobboard.css" />
-    <link rel="stylesheet" href="/css/about.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <title>Jobs For You - JobSensei</title>
+    <link rel="icon" href="/assets/images/Jobsensei.png" type="image/x-icon" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-      integrity="sha512-...your-integrity-code..."
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link rel="stylesheet" href="/css/homepage.css" />
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link rel="stylesheet" href="/css/jobboard.css" />
   </head>
   <body>
-    <nav class="navbar">
-      <a href="#home" class="navbar-brand">JobSensei</a>
-      <button class="navbar-toggler" onclick="toggleNavbar()">☰</button>
-      <div class="navbar-links">
-        <a href="/pages/index.html">Home</a>
-        <a href="/pages/dashboard.html">Dashboard</a>
-        <a href="/pages/about.html">About Us</a>
-        <a href="/pages/contact.html">Contact</a>
-        <a href="javascript:void(0);" id="translate-toggle" class="translate-btn">🌐Change Language</a>
-        <div id="google_translate_element" style="display: none;"></div>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <img src="/assets/images/logo.svg" alt="JobSensei Logo" class="sidebar-logo" />
+        <h2>JobSensei</h2>
       </div>
-    </nav>
+      <nav class="sidebar-nav">
+        <a href="/pages/homepage.html"><i class="fas fa-home"></i> Home</a>
+        <a href="/pages/dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+        <a href="/pages/profile.html"><i class="fas fa-user"></i> My Profile</a>
+        <a href="/pages/jobboard.html" class="active"><i class="fas fa-briefcase"></i> Jobs For You</a>
+        <a href="/career-guide"><i class="fas fa-robot"></i> AI Career Guide</a>
+        <a href="/pages/resumeintro.html"><i class="fas fa-file-alt"></i> Resume Builder</a>
+        <a href="/pages/chatbot.html"><i class="fas fa-comments"></i> Ask Yuki Bot</a>
+        <a href="/pages/connect.html"><i class="fas fa-users"></i> Connect</a>
+        <a href="/pages/saved-courses.html"><i class="fas fa-bookmark"></i> Saved Courses</a>
+        <a href="javascript:void(0);" id="translate-toggle" class="translate-btn">
+          <i class="fas fa-language"></i> Change Language
+        </a>
+        <div id="google_translate_element" style="display: none;"></div>
+      </nav>
+    </aside>
 
-    <main class="job-board-container">
-      <section class="job-board-header">
-        <h1>Jobs For You</h1>
-        <div class="job-search-filter">
-          <input type="text" id="jobSearch" placeholder="Search job titles..." />
-          <select id="locationFilter" name="location" title="location">
-            <option value="">All Locations</option>
-            <option value="Remote">Remote</option>
-            <option value="Mumbai">Mumbai</option>
-            <option value="Bangalore">Bangalore</option>
-          </select>
-          <select id="typeFilter" name="type" title="type">
-            <option value="">All Types</option>
-            <option value="Internship">Internship</option>
-            <option value="Full-time">Full-time</option>
-          </select>
+    <!-- Job Board Section -->
+    <main class="jobboard-section">
+      <div class="jobboard-container">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="header-content">
+            <h1><i class="fas fa-briefcase"></i> Jobs For You</h1>
+            <p>Discover opportunities tailored to your skills and interests</p>
+          </div>
+          <div class="header-stats">
+            <div class="stat-badge">
+              <i class="fas fa-fire"></i>
+              <span><strong>24</strong> New Today</span>
+            </div>
+          </div>
         </div>
-      </section>
-    
-      <section class="job-cards-grid" id="jobCards"></section>
-    
-      <!-- Show More Button -->
-      <div class="show-more-wrapper">
-        <button id="showMoreBtn" class="show-more-btn">Show More</button>
+
+        <!-- Search & Filters -->
+        <div class="search-filter-card">
+          <div class="search-wrapper">
+            <i class="fas fa-search"></i>
+            <input type="text" id="jobSearch" placeholder="Search by job title, company, or skills..." />
+          </div>
+          <div class="filters-wrapper">
+            <select id="locationFilter" class="filter-select">
+              <option value="">All Locations</option>
+              <option value="Remote">Remote</option>
+              <option value="Mumbai">Mumbai</option>
+              <option value="Bangalore">Bangalore</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Pune">Pune</option>
+              <option value="Hyderabad">Hyderabad</option>
+            </select>
+            <select id="typeFilter" class="filter-select">
+              <option value="">All Types</option>
+              <option value="Full-time">Full-time</option>
+              <option value="Internship">Internship</option>
+              <option value="Part-time">Part-time</option>
+              <option value="Contract">Contract</option>
+            </select>
+            <select id="experienceFilter" class="filter-select">
+              <option value="">Experience</option>
+              <option value="Fresher">Fresher</option>
+              <option value="0-2 years">0-2 years</option>
+              <option value="2-5 years">2-5 years</option>
+              <option value="5+ years">5+ years</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Job Cards Grid -->
+        <div class="job-cards-grid" id="jobCards">
+          <!-- Jobs will be dynamically loaded here -->
+        </div>
+
+        <!-- Show More Button -->
+        <div class="show-more-wrapper">
+          <button id="showMoreBtn" class="show-more-btn">
+            <i class="fas fa-chevron-down"></i>
+            Load More Jobs
+          </button>
+        </div>
       </div>
     </main>
-    
+
+    <!-- Google Translate -->
     <script type="text/javascript">
       function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-          pageLanguage: 'en',
-          includedLanguages: 'en,hi,ta,te,ml,bn,kn,mr,gu,pa',
-          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-        }, 'google_translate_element');
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: "en",
+            includedLanguages: "en,hi,ta,te,ml,bn,kn,mr,gu,pa",
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+          },
+          "google_translate_element"
+        );
       }
     </script>
-    <script>
-    document.getElementById("translate-toggle").addEventListener("click", () => {
-      const translateBox = document.getElementById("google_translate_element");
-      const isHidden = translateBox.style.display === "none" || !translateBox.style.display;
-      translateBox.style.display = isHidden ? "block" : "none";
-    });
-    </script>
     <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    
-    
-        
-        <!-- Firebase SDKs (modular approach) -->
-        <script
-          type="module"
-          src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"
-        ></script>
-        <script
-          type="module"
-          src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js"
-        ></script>
-        <script
-          type="module"
-          src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js"
-        ></script>
-    
-        <!-- Your app.js script -->
-        <script type="module" src="/js/app.js"></script>
-    
-        <script>
-          // Show/hide button
-          window.onscroll = function () {
-            const btn = document.querySelector(".scroll-top-btn");
-            if (
-              document.body.scrollTop > 300 ||
-              document.documentElement.scrollTop > 300
-            ) {
-              btn.style.display = "block";
-            } else {
-              btn.style.display = "none";
-            }
-          };
-    
-          // Scroll to top
-          function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }
-        </script>
-    
-        <script>
-          const track = document.getElementById("carouselTrack");
-          const cards = document.querySelectorAll(".job-card");
-          const cardWidth = cards[0].offsetWidth + 20; // card + margin
-          let position = 0;
-          let visibleCards = 3;
-    
-          function moveCarousel(direction) {
-            const totalCards = cards.length;
-            position += direction;
-    
-            if (position < 0) {
-              position = totalCards - visibleCards;
-            } else if (position > totalCards - visibleCards) {
-              position = 0;
-            }
-    
-            const offset = -position * cardWidth;
-            track.style.transform = `translateX(${offset}px)`;
-    
-          }
-        </script>
-    
-        <script>
-          window.addEventListener("load", () => {
-            document.body.classList.add("loaded");
-          });
-        </script>
+    <script>
+      document
+        .getElementById("translate-toggle")
+        .addEventListener("click", () => {
+          const translateBox = document.getElementById(
+            "google_translate_element"
+          );
+          const isHidden =
+            translateBox.style.display === "none" ||
+            !translateBox.style.display;
+          translateBox.style.display = isHidden ? "block" : "none";
+        });
+    </script>
+
+    <!-- Firebase SDKs -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js"></script>
+
+    <script src="/js/homepage-enhanced.js"></script>
     <script src="/js/jobboard.js"></script>
   </body>
 </html>

@@ -3,32 +3,248 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Step 2: Education Information | Resume Builder</title>
-  <link rel="stylesheet" href="/css/resumestep2.css">
+  <title>Step 2: Education - Resume Builder</title>
+  <link rel="icon" href="/assets/images/Jobsensei.png" type="image/x-icon" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <link rel="stylesheet" href="/css/homepage.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <link rel="stylesheet" href="/css/resume-steps.css" />
 </head>
 <body>
-  <div class="container">
-    <div class="form-container">
-      <h1>Step 2: Education Information</h1>
-      <form id="education-info-form">
-        <div class="form-group">
-          <label for="degree">Degree</label>
-          <input type="text" id="degree" placeholder="Enter your degree (e.g., B.Tech)" required>
-        </div>
-        <div class="form-group">
-          <label for="institution">Institution</label>
-          <input type="text" id="institution" placeholder="Enter your institution name" required>
-        </div>
-        <div class="form-group">
-          <label for="graduationYear">Year of Graduation</label>
-          <input type="number" id="graduationYear" placeholder="Enter your year of graduation" required>
-        </div>
-        <div class="button-group">
-          <button type="submit" class="btn-next">Next</button>
-        </div>
-      </form>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <img src="/assets/images/logo.svg" alt="JobSensei Logo" class="sidebar-logo" />
+      <h2>JobSensei</h2>
     </div>
-  </div>
+    <nav class="sidebar-nav">
+      <a href="/pages/homepage.html"><i class="fas fa-home"></i> Home</a>
+      <a href="/pages/dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+      <a href="/pages/profile.html"><i class="fas fa-user"></i> My Profile</a>
+      <a href="/pages/jobboard.html"><i class="fas fa-briefcase"></i> Jobs For You</a>
+      <a href="/career-guide"><i class="fas fa-robot"></i> AI Career Guide</a>
+      <a href="/pages/resumeintro.html" class="active"><i class="fas fa-file-alt"></i> Resume Builder</a>
+      <a href="/pages/chatbot.html"><i class="fas fa-comments"></i> Ask Yuki Bot</a>
+      <a href="/pages/connect.html"><i class="fas fa-users"></i> Connect</a>
+      <a href="/pages/saved-courses.html"><i class="fas fa-bookmark"></i> Saved Courses</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="step-main">
+    <div class="step-wrapper">
+      <!-- Progress Bar -->
+      <div class="progress-container">
+        <div class="progress-header">
+          <span class="progress-title">Resume Building Progress</span>
+          <span class="progress-percentage">25%</span>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" style="width: 25%;"></div>
+        </div>
+        <div class="progress-steps">
+          <div class="progress-step completed">
+            <div class="progress-step-circle"><i class="fas fa-check"></i></div>
+            <span class="progress-step-label">Personal</span>
+          </div>
+          <div class="progress-step active">
+            <div class="progress-step-circle">2</div>
+            <span class="progress-step-label">Education</span>
+          </div>
+          <div class="progress-step">
+            <div class="progress-step-circle">3</div>
+            <span class="progress-step-label">Experience</span>
+          </div>
+          <div class="progress-step">
+            <div class="progress-step-circle">4</div>
+            <span class="progress-step-label">Skills</span>
+          </div>
+          <div class="progress-step">
+            <div class="progress-step-circle">5</div>
+            <span class="progress-step-label">Projects</span>
+          </div>
+          <div class="progress-step">
+            <div class="progress-step-circle">6</div>
+            <span class="progress-step-label">Certifications</span>
+          </div>
+          <div class="progress-step">
+            <div class="progress-step-circle">7</div>
+            <span class="progress-step-label">Summary</span>
+          </div>
+          <div class="progress-step">
+            <div class="progress-step-circle">8</div>
+            <span class="progress-step-label">Preview</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Container -->
+      <div class="form-container">
+        <div class="form-header">
+          <h1><i class="fas fa-graduation-cap"></i> Education</h1>
+          <p>Add your educational qualifications. Start with your most recent degree.</p>
+        </div>
+
+        <form id="education-form">
+          <div class="dynamic-section">
+            <div class="section-header">
+              <h3><i class="fas fa-university"></i> Education Entries</h3>
+              <button type="button" class="add-btn" onclick="addEducation()">
+                <i class="fas fa-plus"></i> Add Education
+              </button>
+            </div>
+
+            <div id="education-entries">
+              <!-- First education entry -->
+              <div class="entry-card">
+                <button type="button" class="remove-btn" onclick="removeEntry(this)" style="display: none;">
+                  <i class="fas fa-times"></i>
+                </button>
+
+                <div class="form-group">
+                  <label><i class="fas fa-school"></i> Degree / Qualification *</label>
+                  <input type="text" name="degree[]" placeholder="e.g., B.Tech in Computer Science" required>
+                </div>
+
+                <div class="form-group">
+                  <label><i class="fas fa-university"></i> Institution Name *</label>
+                  <input type="text" name="institution[]" placeholder="e.g., IIT Bombay" required>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label><i class="fas fa-map-marker-alt"></i> Location</label>
+                    <input type="text" name="location[]" placeholder="e.g., Mumbai, India">
+                  </div>
+                  <div class="form-group">
+                    <label><i class="fas fa-percentage"></i> CGPA / Percentage</label>
+                    <input type="text" name="grade[]" placeholder="e.g., 8.5 CGPA or 85%">
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label><i class="fas fa-calendar-alt"></i> Start Date *</label>
+                    <input type="month" name="startDate[]" required>
+                  </div>
+                  <div class="form-group">
+                    <label><i class="fas fa-calendar-check"></i> End Date</label>
+                    <input type="month" name="endDate[]" placeholder="Leave empty if ongoing">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label><i class="fas fa-info-circle"></i> Additional Details</label>
+                  <textarea name="details[]" placeholder="Relevant coursework, achievements, honors, etc." rows="3"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="button-group">
+            <button type="button" class="btn-prev" onclick="window.location.href='resumestep1.html'">
+              <i class="fas fa-arrow-left"></i> Previous
+            </button>
+            <button type="submit" class="btn-next">
+              Next <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script src="/js/homepage-enhanced.js"></script>
+  <script>
+    let educationCount = 1;
+
+    function addEducation() {
+      educationCount++;
+      const container = document.getElementById('education-entries');
+      const newEntry = document.createElement('div');
+      newEntry.className = 'entry-card';
+      newEntry.innerHTML = `
+        <button type="button" class="remove-btn" onclick="removeEntry(this)">
+          <i class="fas fa-times"></i>
+        </button>
+
+        <div class="form-group">
+          <label><i class="fas fa-school"></i> Degree / Qualification *</label>
+          <input type="text" name="degree[]" placeholder="e.g., B.Tech in Computer Science" required>
+        </div>
+
+        <div class="form-group">
+          <label><i class="fas fa-university"></i> Institution Name *</label>
+          <input type="text" name="institution[]" placeholder="e.g., IIT Bombay" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label><i class="fas fa-map-marker-alt"></i> Location</label>
+            <input type="text" name="location[]" placeholder="e.g., Mumbai, India">
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-percentage"></i> CGPA / Percentage</label>
+            <input type="text" name="grade[]" placeholder="e.g., 8.5 CGPA or 85%">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label><i class="fas fa-calendar-alt"></i> Start Date *</label>
+            <input type="month" name="startDate[]" required>
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-calendar-check"></i> End Date</label>
+            <input type="month" name="endDate[]" placeholder="Leave empty if ongoing">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label><i class="fas fa-info-circle"></i> Additional Details</label>
+          <textarea name="details[]" placeholder="Relevant coursework, achievements, honors, etc." rows="3"></textarea>
+        </div>
+      `;
+      container.appendChild(newEntry);
+
+      // Show remove button on first entry if more than one exists
+      if (educationCount > 1) {
+        const firstEntry = container.querySelector('.entry-card:first-child .remove-btn');
+        if (firstEntry) firstEntry.style.display = 'flex';
+      }
+    }
+
+    function removeEntry(button) {
+      const entry = button.closest('.entry-card');
+      entry.remove();
+      educationCount--;
+
+      // Hide remove button on first entry if only one remains
+      const container = document.getElementById('education-entries');
+      if (educationCount === 1) {
+        const firstEntry = container.querySelector('.entry-card:first-child .remove-btn');
+        if (firstEntry) firstEntry.style.display = 'none';
+      }
+    }
+
+    // Form submission
+    document.getElementById('education-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Save to localStorage and proceed to next step
+      const formData = new FormData(this);
+      localStorage.setItem('resumeEducation', JSON.stringify(Object.fromEntries(formData)));
+      
+      window.location.href = 'resumestep3.html';
+    });
+  </script>
   <script src="/js/resumestep2.js"></script>
 </body>
 </html>

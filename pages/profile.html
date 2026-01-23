@@ -3,73 +3,155 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Profile</title>
+    <title>Profile - JobSensei</title>
+    <link rel="icon" href="/assets/images/Jobsensei.png" type="image/x-icon" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="/css/homepage.css" />
+    <link rel="stylesheet" href="/css/dashboard.css" />
     <link rel="stylesheet" href="/css/profile.css" />
   </head>
   <body>
-    <div class="container">
-      <div class="profile-card">
-        <h1 class="profile-title">Your Profile</h1>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <img src="/assets/images/logo.svg" alt="JobSensei Logo" class="sidebar-logo" />
+        <h2>JobSensei</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="/pages/homepage.html"><i class="fas fa-home"></i> Home</a>
+        <a href="/pages/dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+        <a href="/pages/profile.html" class="active"><i class="fas fa-user"></i> My Profile</a>
+        <a href="/pages/jobboard.html"><i class="fas fa-briefcase"></i> Jobs For You</a>
+        <a href="/career-guide"><i class="fas fa-robot"></i> AI Career Guide</a>
+        <a href="/pages/resumeintro.html"><i class="fas fa-file-alt"></i> Resume Builder</a>
+        <a href="/pages/chatbot.html"><i class="fas fa-comments"></i> Ask Yuki Bot</a>
+        <a href="/pages/connect.html"><i class="fas fa-users"></i> Connect</a>
+        <a href="/pages/saved-courses.html"><i class="fas fa-bookmark"></i> Saved Courses</a>
+        <a href="javascript:void(0);" id="translate-toggle" class="translate-btn">
+          <i class="fas fa-language"></i> Change Language
+        </a>
+        <div id="google_translate_element" style="display: none;"></div>
+      </nav>
+    </aside>
 
-        <div class="progress-container">
-          <div class="progress-bar" id="progress-bar">
-            <div class="progress-fill" id="progress-fill"></div>
+    <!-- Profile Section -->
+    <section class="profile-section">
+      <div class="profile-container">
+        <div class="profile-header">
+          <div class="profile-header-content">
+            <h1 class="profile-title">Your Profile</h1>
+            <p class="profile-subtitle">Manage your personal information and career preferences</p>
           </div>
-          <p class="progress-text" id="progress-text">0%</p>
+          <div class="profile-avatar">
+            <i class="fas fa-user-circle"></i>
+          </div>
         </div>
 
-        <form id="profileForm">
-          <div class="input-group">
-            <label for="name">Full Name</label>
-            <input
-              type="text"
-              id="name"
-              placeholder="Enter your name"
-              required
-            />
+        <div class="progress-card">
+          <div class="progress-info">
+            <h3>Profile Completion</h3>
+            <p>Complete your profile to get better recommendations</p>
+          </div>
+          <div class="progress-container">
+            <div class="progress-bar" id="progress-bar">
+              <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <span class="progress-text" id="progress-text">0%</span>
+          </div>
+        </div>
+
+        <form id="profileForm" class="profile-form">
+          <div class="form-grid">
+            <div class="input-group">
+              <label for="name">
+                <i class="fas fa-user"></i>
+                Full Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                placeholder="Enter your name"
+                required
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="age">
+                <i class="fas fa-calendar"></i>
+                Age
+              </label>
+              <input
+                type="number"
+                id="age"
+                placeholder="Enter your age"
+                required
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="city">
+                <i class="fas fa-map-marker-alt"></i>
+                City
+              </label>
+              <input type="text" id="city" placeholder="Your city" required />
+            </div>
+
+            <div class="input-group">
+              <label for="email">
+                <i class="fas fa-envelope"></i>
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                placeholder="Your email"
+                required
+                readonly
+              />
+            </div>
           </div>
 
-          <div class="input-group">
-            <label for="age">Age</label>
-            <input
-              type="number"
-              id="age"
-              placeholder="Enter your age"
-              required
-            />
-          </div>
-
-          <div class="input-group">
-            <label for="city">City</label>
-            <input type="text" id="city" placeholder="Your city" required />
-          </div>
-
-          <div class="input-group">
-            <label for="skills">Skills (comma separated)</label>
+          <div class="input-group full-width">
+            <label for="skills">
+              <i class="fas fa-code"></i>
+              Skills (comma separated)
+            </label>
             <input
               type="text"
               id="skills"
-              placeholder="e.g. JavaScript, Python"
+              placeholder="e.g. JavaScript, Python, React"
               required
             />
           </div>
 
-          <div class="input-group">
-            <label for="education">Education</label>
+          <div class="input-group full-width">
+            <label for="education">
+              <i class="fas fa-graduation-cap"></i>
+              Education
+            </label>
             <input
               type="text"
               id="education"
-              placeholder="e.g. B.Tech in CSE"
+              placeholder="e.g. B.Tech in Computer Science"
               required
             />
           </div>
 
-          <div class="input-group">
-            <label for="careerInterest">Career Interest</label>
+          <div class="input-group full-width">
+            <label for="careerInterest">
+              <i class="fas fa-briefcase"></i>
+              Career Interest
+            </label>
             <input
               type="text"
               id="careerInterest"
@@ -78,26 +160,115 @@
             />
           </div>
 
-          <div class="input-group">
-            <label for="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              placeholder="Your email"
-              required
-              readonly
-            />
-          </div>
-
           <div class="button-group">
-            <button type="submit" class="btn save-btn">Save Changes</button>
+            <button type="submit" class="btn-primary">
+              <i class="fas fa-save"></i>
+              Save Changes
+            </button>
+            <button type="button" class="btn-secondary" onclick="window.location.href='/pages/dashboard.html'">
+              <i class="fas fa-times"></i>
+              Cancel
+            </button>
           </div>
         </form>
-
-        <button id="logoutBtn" class="btn logout-btn">Logout</button>
       </div>
-    </div>
+    </section>
 
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <h2>JobSensei</h2>
+          <p>Your smart career navigator for Tier-2/3 cities.</p>
+          <p>
+            Empowering students with skill-based job recommendations and
+            tailored learning paths using AI.
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="/pages/homepage.html">Home</a></li>
+            <li><a href="/pages/about.html">About Us</a></li>
+            <li><a href="/pages/contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-contact">
+          <h4>Contact</h4>
+          <p><i class="fas fa-envelope"></i> support@jobsensei.dev</p>
+          <p><i class="fas fa-phone"></i> +91-9876543210</p>
+          <div class="footer-icons">
+            <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="mailto:support@jobsensei.dev"
+              ><i class="fas fa-envelope"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 JobSensei. All rights reserved.</p>
+      </div>
+
+      <!-- Scroll to top -->
+      <button onclick="scrollToTop()" class="scroll-top-btn" title="Go to top">
+        <i class="fas fa-arrow-up"></i>
+      </button>
+    </footer>
+
+    <!-- Google Translate -->
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: "en",
+            includedLanguages: "en,hi,ta,te,ml,bn,kn,mr,gu,pa",
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+          },
+          "google_translate_element"
+        );
+      }
+    </script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script>
+      document
+        .getElementById("translate-toggle")
+        .addEventListener("click", () => {
+          const translateBox = document.getElementById(
+            "google_translate_element"
+          );
+          const isHidden =
+            translateBox.style.display === "none" ||
+            !translateBox.style.display;
+          translateBox.style.display = isHidden ? "block" : "none";
+        });
+    </script>
+
+    <!-- Scripts -->
+    <script>
+      // Scroll to top
+      window.scrollToTop = function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      };
+
+      // Scroll to top button show/hide
+      const btn = document.querySelector(".scroll-top-btn");
+      if (btn) {
+        window.onscroll = () => {
+          btn.style.display = window.scrollY > 300 ? "block" : "none";
+        };
+      }
+
+      // Navbar toggle for mobile
+      function toggleNavbar() {
+        const navLinks = document.querySelector('.navbar-links');
+        navLinks.classList.toggle('active');
+      }
+    </script>
+    <script src="/js/homepage-enhanced.js"></script>
     <script type="module" src="/js/profile.js"></script>
   </body>
 </html>

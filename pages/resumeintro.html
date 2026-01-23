@@ -3,103 +3,253 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Resume Builder | JobSensei</title>
-    <link rel="stylesheet" href="/css/resumeintro.css" />
+    <title>Resume Builder - JobSensei</title>
+    <link rel="icon" href="/assets/images/Jobsensei.png" type="image/x-icon" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-      integrity="sha512-...your-integrity-code..."
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link rel="stylesheet" href="/css/homepage.css" />
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link rel="stylesheet" href="/css/resumeintro.css" />
   </head>
 
   <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-      <a href="#" class="navbar-brand">JobSensei</a>
-    </nav>
-
-    <div class="intro-container">
-      <h1>Welcome to the Resume Builder</h1>
-      <p class="intro-subtitle">
-        A fast, easy, and professional way to create your resume. Get started in
-        just a few steps and land your dream job!
-      </p>
-
-      <div class="intro-steps">
-        <div class="step">
-          <i class="fas fa-user"></i>
-          <h3>Step 1: Personal Information</h3>
-          <p>Fill in your name, contact details, and more.</p>
-        </div>
-        <div class="step">
-          <i class="fas fa-graduation-cap"></i>
-          <h3>Step 2: Education & Experience</h3>
-          <p>Highlight your academic background and professional experience.</p>
-        </div>
-        <div class="step">
-          <i class="fas fa-briefcase"></i>
-          <h3>Step 3: Skills & Projects</h3>
-          <p>Showcase your skills and past projects.</p>
-        </div>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <img src="/assets/images/logo.svg" alt="JobSensei Logo" class="sidebar-logo" />
+        <h2>JobSensei</h2>
       </div>
+      <nav class="sidebar-nav">
+        <a href="/pages/homepage.html"><i class="fas fa-home"></i> Home</a>
+        <a href="/pages/dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+        <a href="/pages/profile.html"><i class="fas fa-user"></i> My Profile</a>
+        <a href="/pages/jobboard.html"><i class="fas fa-briefcase"></i> Jobs For You</a>
+        <a href="/career-guide"><i class="fas fa-robot"></i> AI Career Guide</a>
+        <a href="/pages/resumeintro.html" class="active"><i class="fas fa-file-alt"></i> Resume Builder</a>
+        <a href="/pages/chatbot.html"><i class="fas fa-comments"></i> Ask Yuki Bot</a>
+        <a href="/pages/connect.html"><i class="fas fa-users"></i> Connect</a>
+        <a href="/pages/saved-courses.html"><i class="fas fa-bookmark"></i> Saved Courses</a>
+        <a href="javascript:void(0);" id="translate-toggle" class="translate-btn">
+          <i class="fas fa-language"></i> Change Language
+        </a>
+        <div id="google_translate_element" style="display: none;"></div>
+      </nav>
+    </aside>
 
-      <div class="intro-footer">
-        <p>
-          Ready to get started? Create a PDF that’s ready to impress employers. <br>
-          Or already made an awesome resume ? Check its ATS Score.
-        </p>
-        <button class="start-btn" onclick="window.location.href='resumestep1.html'">
-          Start Building
-        </button>&nbsp;&nbsp;&nbsp;&nbsp;
-      <button onclick="window.location.href = 'ats-analyze.html';" id="ats">
-        Get ATS Score
-      </button>
-      </div>
-    </div>
+    <!-- Main Content -->
+    <main class="resume-main">
+      <div class="resume-container">
+        <!-- Hero Section -->
+        <div class="resume-hero">
+          <div class="hero-content">
+            <div class="hero-badge">
+              <i class="fas fa-magic"></i>
+              <span>AI-Powered Resume Builder</span>
+            </div>
+            <h1>Create Your Professional Resume</h1>
+            <p>Build a stunning, ATS-friendly resume in minutes. Stand out from the crowd and land your dream job!</p>
+          </div>
+          <div class="hero-illustration">
+            <i class="fas fa-file-alt"></i>
+          </div>
+        </div>
 
-    <!--Footer-->
-    <footer class="footer">
-        <div class="footer-container">
-          <div class="footer-brand">
-            <h2>JobSensei</h2>
-            <p>Your smart career navigator for Tier-2/3 cities.</p>
-            <p>
-              Empowering students with skill-based job recommendations and
-              tailored learning paths using AI.
-            </p>
+        <!-- Features Grid -->
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon" style="background: rgba(59, 130, 246, 0.1);">
+              <i class="fas fa-bolt" style="color: #3b82f6;"></i>
+            </div>
+            <h3>Quick & Easy</h3>
+            <p>Create your resume in just 5 minutes with our intuitive step-by-step process</p>
           </div>
-  
-          <div class="footer-links">
-            <h4>Quick Links</h4>
-            <ul>
-              <li><a href="/pages/index.html">Home</a></li>
-              <li><a href="/pages/about.html">About Us</a></li>
-              <li><a href="/pages/contact.html">Contact</a></li>
-            </ul>
+
+          <div class="feature-card">
+            <div class="feature-icon" style="background: rgba(139, 92, 246, 0.1);">
+              <i class="fas fa-robot" style="color: #8b5cf6;"></i>
+            </div>
+            <h3>ATS Optimized</h3>
+            <p>Our templates are designed to pass Applicant Tracking Systems with ease</p>
           </div>
-  
-          <div class="footer-contact">
-            <h4>Contact</h4>
-            <p><i class="fas fa-envelope"></i> support@jobsensei.dev</p>
-            <p><i class="fas fa-phone"></i> +91-9876543210</p>
-            <div class="footer-icons">
-              <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
-              <a href="#" target="_blank"><i class="fab fa-github"></i></a>
-              <a href="mailto:support@jobsensei.dev"
-                ><i class="fas fa-envelope"></i
-              ></a>
+
+          <div class="feature-card">
+            <div class="feature-icon" style="background: rgba(16, 185, 129, 0.1);">
+              <i class="fas fa-palette" style="color: #10b981;"></i>
+            </div>
+            <h3>Professional Templates</h3>
+            <p>Choose from beautifully designed templates that impress recruiters</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon" style="background: rgba(245, 158, 11, 0.1);">
+              <i class="fas fa-download" style="color: #f59e0b;"></i>
+            </div>
+            <h3>Export to PDF</h3>
+            <p>Download your resume as a high-quality PDF ready to send to employers</p>
+          </div>
+        </div>
+
+        <!-- Steps Section -->
+        <div class="steps-section">
+          <h2><i class="fas fa-list-ol"></i> How It Works</h2>
+          <p class="steps-subtitle">Follow these simple steps to create your perfect resume</p>
+          
+          <div class="steps-grid">
+            <div class="step-card">
+              <div class="step-number">1</div>
+              <div class="step-icon">
+                <i class="fas fa-user"></i>
+              </div>
+              <h3>Personal Information</h3>
+              <p>Add your name, contact details, and professional summary</p>
+            </div>
+
+            <div class="step-card">
+              <div class="step-number">2</div>
+              <div class="step-icon">
+                <i class="fas fa-graduation-cap"></i>
+              </div>
+              <h3>Education</h3>
+              <p>List your academic qualifications and achievements</p>
+            </div>
+
+            <div class="step-card">
+              <div class="step-number">3</div>
+              <div class="step-icon">
+                <i class="fas fa-briefcase"></i>
+              </div>
+              <h3>Experience</h3>
+              <p>Highlight your work experience and responsibilities</p>
+            </div>
+
+            <div class="step-card">
+              <div class="step-number">4</div>
+              <div class="step-icon">
+                <i class="fas fa-code"></i>
+              </div>
+              <h3>Skills & Projects</h3>
+              <p>Showcase your technical skills and notable projects</p>
             </div>
           </div>
         </div>
-  
-        <div class="footer-bottom">
-          <p>&copy; 2025 JobSensei. All rights reserved.</p>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+          <div class="cta-content">
+            <h2>Ready to Build Your Resume?</h2>
+            <p>Start creating your professional resume now or check your existing resume's ATS score</p>
+            <div class="cta-buttons">
+              <button class="btn-primary" onclick="window.location.href='resumestep1.html'">
+                <i class="fas fa-plus-circle"></i>
+                Start Building Resume
+              </button>
+              <button class="btn-secondary" onclick="window.location.href='ats-analyze.html'">
+                <i class="fas fa-chart-bar"></i>
+                Check ATS Score
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" style="margin-left: 260px;">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <h2>JobSensei</h2>
+          <p>Your smart career navigator for Tier-2/3 cities.</p>
+          <p>
+            Empowering students with skill-based job recommendations and
+            tailored learning paths using AI.
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="/pages/homepage.html">Home</a></li>
+            <li><a href="/pages/about.html">About Us</a></li>
+            <li><a href="/pages/contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-contact">
+          <h4>Contact</h4>
+          <p><i class="fas fa-envelope"></i> support@jobsensei.dev</p>
+          <p><i class="fas fa-phone"></i> +91-9876543210</p>
+          <div class="footer-icons">
+            <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="mailto:support@jobsensei.dev"
+              ><i class="fas fa-envelope"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 JobSensei. All rights reserved.</p>
+      </div>
+
+      <!-- Scroll to top -->
+      <button onclick="scrollToTop()" class="scroll-top-btn" title="Go to top">
+        <i class="fas fa-arrow-up"></i>
+      </button>
+    </footer>
+
+    <!-- Google Translate -->
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: "en",
+            includedLanguages: "en,hi,ta,te,ml,bn,kn,mr,gu,pa",
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+          },
+          "google_translate_element"
+        );
+      }
+    </script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script>
+      document
+        .getElementById("translate-toggle")
+        .addEventListener("click", () => {
+          const translateBox = document.getElementById(
+            "google_translate_element"
+          );
+          const isHidden =
+            translateBox.style.display === "none" ||
+            !translateBox.style.display;
+          translateBox.style.display = isHidden ? "block" : "none";
+        });
+    </script>
+
+    <!-- Scripts -->
+    <script>
+      // Scroll to top
+      window.scrollToTop = function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      };
+
+      // Scroll to top button show/hide
+      const btn = document.querySelector(".scroll-top-btn");
+      if (btn) {
+        window.onscroll = () => {
+          btn.style.display = window.scrollY > 300 ? "block" : "none";
+        };
+      }
+    </script>
+    <script src="/js/homepage-enhanced.js"></script>
   </body>
 </html>

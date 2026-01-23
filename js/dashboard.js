@@ -47,25 +47,88 @@ import {
   setDoc,
 } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-// Firebase config
-const firebaseConfig = {
-  apiKey: "",
-  authDomain: "jobsensei-84540.firebaseapp.com",
-  projectId: "jobsensei-84540",
-  storageBucket: "jobsensei-84540.appspot.com",
-  messagingSenderId: "293854344933",
-  appId: "1:293854344933:web:227ce709e4dfdf7bc2460c",
-  measurementId: "G-VHGEZ3Y68H",
-};
+// Update progress bars based on user data
+function updateProgressBars(userData = null) {
+  // Calculate profile completion based on ACTUAL profile page fields
+  let profileCompletion = 0;
+  if (userData) {
+    // Only check fields that exist in the profile page
+    const fields = [
+      userData.name,           // Full Name
+      userData.age,            // Age
+      userData.city,           // City
+      userData.email,          // Email
+      userData.skills && userData.skills.length > 0,  // Skills
+      userData.education,      // Education
+      userData.careerInterest  // Career Interest
+    ];
+    
+    const filledFields = fields.filter(field => {
+      if (typeof field === 'boolean') return field;
+      return field && field !== '';
+    }).length;
+    
+    profileCompletion = Math.round((filledFields / fields.length) * 100);
+  } else {
+    profileCompletion = 0; // Default if no data
+  }
+  
+  // Update profile completion in all places
+  const profileProgressBar = document.getElementById('profile-progress-bar');
+  const profileProgressValue = document.getElementById('profile-progress');
+  const profileStatNumber = document.getElementById('profile-stat');
+  
+  if (profileProgressBar) {
+    profileProgressBar.style.width = profileCompletion + '%';
+  }
+  if (profileProgressValue) {
+    profileProgressValue.textContent = profileCompletion + '%';
+  }
+  if (profileStatNumber) {
+    profileStatNumber.textContent = profileCompletion + '%';
+  }
+
+  // Update skills progress
+  const skillsList = document.getElementById('skills-list');
+  const skillChips = skillsList.querySelectorAll('.skill-chip');
+  const skillsCount = skillChips.length;
+  const skillsMax = 10;
+  const skillsPercentage = Math.min((skillsCount / skillsMax) * 100, 100);
+  
+  const skillsProgressBar = document.getElementById('skills-progress-bar');
+  const skillsProgressText = document.getElementById('skills-progress');
+  if (skillsProgressBar) {
+    skillsProgressBar.style.width = skillsPercentage + '%';
+  }
+  if (skillsProgressText) {
+    skillsProgressText.textContent = `${skillsCount}/${skillsMax}`;
+  }
+
+  // Update courses progress
+  const savedCoursesCount = parseInt(document.getElementById('saved-courses-count')?.textContent || '0');
+  const coursesMax = 5;
+  const coursesPercentage = Math.min((savedCoursesCount / coursesMax) * 100, 100);
+  
+  const coursesProgressBar = document.getElementById('courses-progress-bar');
+  const coursesProgressText = document.getElementById('courses-progress');
+  if (coursesProgressBar) {
+    coursesProgressBar.style.width = coursesPercentage + '%';
+  }
+  if (coursesProgressText) {
+    coursesProgressText.textContent = `${savedCoursesCount}/${coursesMax}`;
+  }
+}
+
+// Import Firebase and YouTube API configuration from centralized config
+import { firebaseConfig, YOUTUBE_API_KEY } from './config.js';
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// YouTube API Key - DISABLED FOR SECURITY
-// TODO: Add your YouTube API key here or enable it in Google Cloud Console
-const apiKey = "YOUR_YOUTUBE_API_KEY_HERE";
+// YouTube API Key from config
+const apiKey = YOUTUBE_API_KEY;
 
 let userSkills = [];
 
@@ -85,6 +148,9 @@ onAuthStateChanged(auth, async (user) => {
         console.log("User Skills on Load:", userSkills);
         renderSkillChips(userSkills);
 
+        // Update progress bars with user data
+        updateProgressBars(userData);
+
         if (userSkills.length > 0) {
           await fetchYouTubeRecommendations(userSkills);
         } else {
@@ -95,9 +161,12 @@ onAuthStateChanged(auth, async (user) => {
         document.getElementById(
           "greeting"
         ).textContent = `Welcome, ${user.email}!`;
+        // Update progress bars without user data
+        updateProgressBars();
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
+      updateProgressBars();
     }
   } else {
     window.location.href = "login.html";
@@ -259,6 +328,9 @@ function renderSkillChips(skills) {
     `;
     skillsList.appendChild(chip);
   });
+  
+  // Update progress bars after rendering skills
+  updateProgressBars();
 }
 
 window.removeSkill = function (skill) {

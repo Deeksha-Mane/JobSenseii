@@ -3,36 +3,158 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Step 1: Personal Information | Resume Builder</title>
-  <link rel="stylesheet" href="../css/resumestep1.css">
+  <title>Step 1: Personal Information - Resume Builder</title>
+  <link rel="icon" href="/assets/images/Jobsensei.png" type="image/x-icon" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <link rel="stylesheet" href="/css/homepage.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <link rel="stylesheet" href="/css/resume-steps.css" />
 </head>
 <body>
-  <div class="container">
-    <div class="form-container">
-      <h1>Step 1: Personal Information</h1>
-      <form id="personal-info-form">
-        <div class="form-group">
-          <label for="fullName">Full Name</label>
-          <input type="text" id="fullName" placeholder="Enter your full name" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" placeholder="Enter your email" required>
-        </div>
-        <div class="form-group">
-          <label for="phone">Phone Number</label>
-          <input type="text" id="phone" placeholder="Enter your phone number" required>
-        </div>
-        <div class="form-group">
-          <label for="address">Address</label>
-          <input type="text" id="address" placeholder="Enter your address" required>
-        </div>
-        <div class="button-group">
-          <button type="submit" class="btn-next">Next</button>
-        </div>
-      </form>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <img src="/assets/images/logo.svg" alt="JobSensei Logo" class="sidebar-logo" />
+      <h2>JobSensei</h2>
     </div>
-  </div>
+    <nav class="sidebar-nav">
+      <a href="/pages/homepage.html"><i class="fas fa-home"></i> Home</a>
+      <a href="/pages/dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+      <a href="/pages/profile.html"><i class="fas fa-user"></i> My Profile</a>
+      <a href="/pages/jobboard.html"><i class="fas fa-briefcase"></i> Jobs For You</a>
+      <a href="/career-guide"><i class="fas fa-robot"></i> AI Career Guide</a>
+      <a href="/pages/resumeintro.html" class="active"><i class="fas fa-file-alt"></i> Resume Builder</a>
+      <a href="/pages/chatbot.html"><i class="fas fa-comments"></i> Ask Yuki Bot</a>
+      <a href="/pages/connect.html"><i class="fas fa-users"></i> Connect</a>
+      <a href="/pages/saved-courses.html"><i class="fas fa-bookmark"></i> Saved Courses</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="step-main">
+    <div class="step-wrapper">
+      <!-- Progress Bar -->
+      <div class="progress-container">
+        <div class="progress-header">
+          <span class="progress-title">Resume Building Progress</span>
+          <span class="progress-percentage">12.5%</span>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" style="width: 12.5%;"></div>
+        </div>
+        <div class="progress-steps">
+          <div class="progress-step active">
+            <div class="progress-step-circle">1</div>
+            <span class="progress-step-label">Personal</span>
+          </div>
+          <div class="progress-step">
+            <div class="progress-step-circle">2</div>
+            <span class="progress-step-label">Education</span>
+          </div>
+          <div class="progress-step">
+            <div class="progress-step-circle">3</div>
+            <span class="progress-step-label">Experience</span>
+          </div>
+          <div class="progress-step">
+            <div class="progress-step-circle">4</div>
+            <span class="progress-step-label">Skills</span>
+          </div>
+          <div class="progress-step">
+            <div class="progress-step-circle">5</div>
+            <span class="progress-step-label">Projects</span>
+          </div>
+          <div class="progress-step">
+            <div class="progress-step-circle">6</div>
+            <span class="progress-step-label">Certifications</span>
+          </div>
+          <div class="progress-step">
+            <div class="progress-step-circle">7</div>
+            <span class="progress-step-label">Summary</span>
+          </div>
+          <div class="progress-step">
+            <div class="progress-step-circle">8</div>
+            <span class="progress-step-label">Preview</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Container -->
+      <div class="form-container">
+        <div class="form-header">
+          <h1><i class="fas fa-user"></i> Personal Information</h1>
+          <p>Let's start with your basic details. This information will appear at the top of your resume.</p>
+        </div>
+
+        <form id="personal-info-form">
+          <div class="form-group">
+            <label for="fullName"><i class="fas fa-id-card"></i> Full Name *</label>
+            <input type="text" id="fullName" placeholder="e.g., John Doe" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email"><i class="fas fa-envelope"></i> Email Address *</label>
+              <input type="email" id="email" placeholder="john.doe@example.com" required>
+            </div>
+            <div class="form-group">
+              <label for="phone"><i class="fas fa-phone"></i> Phone Number *</label>
+              <input type="tel" id="phone" placeholder="+91 98765 43210" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="city"><i class="fas fa-map-marker-alt"></i> City *</label>
+              <input type="text" id="city" placeholder="e.g., Mumbai" required>
+            </div>
+            <div class="form-group">
+              <label for="state"><i class="fas fa-map"></i> State *</label>
+              <input type="text" id="state" placeholder="e.g., Maharashtra" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="address"><i class="fas fa-home"></i> Full Address</label>
+            <input type="text" id="address" placeholder="Street, Area, Pincode">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="linkedin"><i class="fab fa-linkedin"></i> LinkedIn Profile</label>
+              <input type="url" id="linkedin" placeholder="https://linkedin.com/in/yourprofile">
+            </div>
+            <div class="form-group">
+              <label for="github"><i class="fab fa-github"></i> GitHub Profile</label>
+              <input type="url" id="github" placeholder="https://github.com/yourusername">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="portfolio"><i class="fas fa-globe"></i> Portfolio Website</label>
+            <input type="url" id="portfolio" placeholder="https://yourportfolio.com">
+          </div>
+
+          <div class="button-group">
+            <button type="button" class="btn-prev" onclick="window.location.href='resumeintro.html'">
+              <i class="fas fa-arrow-left"></i> Back
+            </button>
+            <button type="submit" class="btn-next">
+              Next <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script src="/js/homepage-enhanced.js"></script>
   <script src="/js/resumestep1.js"></script>
 </body>
 </html>

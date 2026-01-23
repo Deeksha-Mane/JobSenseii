@@ -1,124 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Step 7: Certifications & Achievements | Resume Builder</title>
-    <link rel="stylesheet" href="../css/resumestep7.css" />
-  </head>
-  <body>
-    <div class="container">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Step 7: Summary - Resume Builder</title>
+  <link rel="icon" href="/assets/images/Jobsensei.png" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="/css/homepage.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <link rel="stylesheet" href="/css/resume-steps.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <img src="/assets/images/logo.svg" alt="JobSensei Logo" class="sidebar-logo" />
+      <h2>JobSensei</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="/pages/homepage.html"><i class="fas fa-home"></i> Home</a>
+      <a href="/pages/dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+      <a href="/pages/profile.html"><i class="fas fa-user"></i> My Profile</a>
+      <a href="/pages/jobboard.html"><i class="fas fa-briefcase"></i> Jobs For You</a>
+      <a href="/career-guide"><i class="fas fa-robot"></i> AI Career Guide</a>
+      <a href="/pages/resumeintro.html" class="active"><i class="fas fa-file-alt"></i> Resume Builder</a>
+      <a href="/pages/chatbot.html"><i class="fas fa-comments"></i> Ask Yuki Bot</a>
+      <a href="/pages/connect.html"><i class="fas fa-users"></i> Connect</a>
+      <a href="/pages/saved-courses.html"><i class="fas fa-bookmark"></i> Saved Courses</a>
+    </nav>
+  </aside>
+
+  <main class="step-main">
+    <div class="step-wrapper">
+      <div class="progress-container">
+        <div class="progress-header">
+          <span class="progress-title">Resume Building Progress</span>
+          <span class="progress-percentage">87.5%</span>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" style="width: 87.5%;"></div>
+        </div>
+        <div class="progress-steps">
+          <div class="progress-step completed"><div class="progress-step-circle"><i class="fas fa-check"></i></div><span class="progress-step-label">Personal</span></div>
+          <div class="progress-step completed"><div class="progress-step-circle"><i class="fas fa-check"></i></div><span class="progress-step-label">Education</span></div>
+          <div class="progress-step completed"><div class="progress-step-circle"><i class="fas fa-check"></i></div><span class="progress-step-label">Experience</span></div>
+          <div class="progress-step completed"><div class="progress-step-circle"><i class="fas fa-check"></i></div><span class="progress-step-label">Skills</span></div>
+          <div class="progress-step completed"><div class="progress-step-circle"><i class="fas fa-check"></i></div><span class="progress-step-label">Projects</span></div>
+          <div class="progress-step completed"><div class="progress-step-circle"><i class="fas fa-check"></i></div><span class="progress-step-label">Certifications</span></div>
+          <div class="progress-step active"><div class="progress-step-circle">7</div><span class="progress-step-label">Summary</span></div>
+          <div class="progress-step"><div class="progress-step-circle">8</div><span class="progress-step-label">Preview</span></div>
+        </div>
+      </div>
+
       <div class="form-container">
-        <h1>Step 7: Certifications & Achievements</h1>
-        <form id="certifications-form">
-          <!-- Certifications Section -->
-          <div class="section">
-            <h2>Certifications</h2>
-            <div id="certifications-container">
-              <!-- Certification entries will be added here -->
-            </div>
-            <button type="button" id="add-certification" class="btn-add">
-              Add Certification
-            </button>
+        <div class="form-header">
+          <h1><i class="fas fa-file-signature"></i> Professional Summary</h1>
+          <p>Write a compelling summary that highlights your key strengths and career objectives.</p>
+        </div>
+
+        <form id="summary-form">
+          <div class="form-group">
+            <label><i class="fas fa-user-tie"></i> Professional Summary *</label>
+            <textarea name="summary" placeholder="Example:&#10;&#10;Results-driven Software Engineer with 3+ years of experience in full-stack development. Proficient in React, Node.js, and cloud technologies. Passionate about building scalable applications and solving complex problems. Seeking to leverage my technical expertise to contribute to innovative projects." rows="8" required></textarea>
+            <small style="color: var(--text-secondary); font-size: 0.85rem; display: block; margin-top: 0.5rem;">
+              <i class="fas fa-lightbulb"></i> Tip: Keep it concise (3-5 sentences), highlight your experience, key skills, and career goals.
+            </small>
           </div>
 
-          <!-- Achievements Section -->
-          <div class="section">
-            <h2>Achievements</h2>
-            <div id="achievements-container">
-              <!-- Achievement entries will be added here -->
-            </div>
-            <button type="button" id="add-achievement" class="btn-add">
-              Add Achievement
-            </button>
+          <div class="form-group">
+            <label><i class="fas fa-bullseye"></i> Career Objective (Optional)</label>
+            <textarea name="objective" placeholder="Example:&#10;&#10;To secure a challenging position as a Full Stack Developer where I can utilize my skills in modern web technologies to create impactful solutions and grow professionally." rows="4"></textarea>
+            <small style="color: var(--text-secondary); font-size: 0.85rem; display: block; margin-top: 0.5rem;">
+              <i class="fas fa-info-circle"></i> Optional: Add if you're a fresher or changing careers
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label><i class="fas fa-trophy"></i> Key Achievements (Optional)</label>
+            <textarea name="achievements" placeholder="• Increased application performance by 40%&#10;• Led a team of 5 developers on a critical project&#10;• Published 3 research papers in international conferences" rows="4"></textarea>
+            <small style="color: var(--text-secondary); font-size: 0.85rem; display: block; margin-top: 0.5rem;">
+              <i class="fas fa-star"></i> Highlight your most impressive accomplishments
+            </small>
           </div>
 
           <div class="button-group">
-            <button type="submit" class="btn-next">Next</button>
+            <button type="button" class="btn-prev" onclick="window.location.href='resumestep6.html'">
+              <i class="fas fa-arrow-left"></i> Previous
+            </button>
+            <button type="submit" class="btn-next">
+              Preview Resume <i class="fas fa-eye"></i>
+            </button>
           </div>
         </form>
       </div>
     </div>
+  </main>
 
-    <template id="certification-template">
-      <div class="certification-entry">
-        <div class="form-group">
-          <label>Certification Name</label>
-          <input
-            type="text"
-            class="certification-name"
-            placeholder="e.g., AWS Certified Solutions Architect"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label>Issuing Organization</label>
-          <input
-            type="text"
-            class="issuing-org"
-            placeholder="e.g., Amazon Web Services"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label>Issue Date</label>
-          <input type="month" class="issue-date" required />
-        </div>
-        <div class="form-group">
-          <label>Expiration Date (if applicable)</label>
-          <input type="month" class="expiration-date" />
-          <label class="checkbox-label">
-            <input type="checkbox" class="no-expiration" /> No expiration
-          </label>
-        </div>
-        <div class="form-group">
-          <label>Credential ID/URL</label>
-          <input
-            type="text"
-            class="credential-id"
-            placeholder="Credential ID or verification URL"
-          />
-        </div>
-        <button type="button" class="btn-remove">Remove Certification</button>
-      </div>
-    </template>
-
-    <template id="achievement-template">
-      <div class="achievement-entry">
-        <div class="form-group">
-          <label>Achievement Title</label>
-          <input
-            type="text"
-            class="achievement-title"
-            placeholder="e.g., Employee of the Year 2023"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label>Date Received</label>
-          <input type="month" class="achievement-date" required />
-        </div>
-        <div class="form-group">
-          <label>Description</label>
-          <textarea
-            class="achievement-description"
-            rows="3"
-            placeholder="Describe the achievement and its significance"
-            required
-          ></textarea>
-        </div>
-        <div class="form-group">
-          <label>Issuing Organization</label>
-          <input
-            type="text"
-            class="issuing-org"
-            placeholder="Organization that recognized the achievement"
-          />
-        </div>
-        <button type="button" class="btn-remove">Remove Achievement</button>
-      </div>
-    </template>
-
-    <script src="../js/resumestep7.js"></script>
-  </body>
+  <script src="/js/homepage-enhanced.js"></script>
+  <script>
+    document.getElementById('summary-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      localStorage.setItem('resumeSummary', JSON.stringify(Object.fromEntries(formData)));
+      window.location.href = 'resumestep8.html';
+    });
+  </script>
+</body>
 </html>

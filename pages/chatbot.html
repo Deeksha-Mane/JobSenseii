@@ -3,65 +3,144 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Career Assistant</title>
-    <link rel="stylesheet" href="../css/chatbot.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Yuki AI Assistant - JobSensei</title>
+    <link rel="icon" href="/assets/images/Jobsensei.png" type="image/x-icon" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="/css/homepage.css" />
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link rel="stylesheet" href="/css/chatbot.css" />
   </head>
-  <body class="loaded">
-    <div class="chatbot-container">
-      <div class="chat-container">
-    <!-- Enhanced Header HTML -->
-<div class="chat-header">
-  <div class="header-content">
-    <div class="header-bot-icon">
-      <!-- <span class="icon-circle">
-      </span> -->
-      <i class="fa-brands fa-android"></i>
-    </div>
-    <span>Hi there, YUKI here!</span>
-  </div>
-  <button class="theme-toggle" id="theme-toggle" title="Toggle dark/light mode">
-    <i class="fas fa-moon"></i>
-  </button>
-</div>
-        <div class="chat-messages" id="chat-messages">
-          <div class="message bot-message">
-            <div class="bot-avatar">
-              <img src="../assets/images/google-gemini-icon.png" alt="Yuki" />
+  <body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <img src="/assets/images/logo.svg" alt="JobSensei Logo" class="sidebar-logo" />
+        <h2>JobSensei</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="/pages/homepage.html"><i class="fas fa-home"></i> Home</a>
+        <a href="/pages/dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+        <a href="/pages/profile.html"><i class="fas fa-user"></i> My Profile</a>
+        <a href="/pages/jobboard.html"><i class="fas fa-briefcase"></i> Jobs For You</a>
+        <a href="/career-guide"><i class="fas fa-robot"></i> AI Career Guide</a>
+        <a href="/pages/resumeintro.html"><i class="fas fa-file-alt"></i> Resume Builder</a>
+        <a href="/pages/chatbot.html" class="active"><i class="fas fa-comments"></i> Ask Yuki Bot</a>
+        <a href="/pages/connect.html"><i class="fas fa-users"></i> Connect</a>
+        <a href="/pages/saved-courses.html"><i class="fas fa-bookmark"></i> Saved Courses</a>
+        <a href="javascript:void(0);" id="translate-toggle" class="translate-btn">
+          <i class="fas fa-language"></i> Change Language
+        </a>
+        <div id="google_translate_element" style="display: none;"></div>
+      </nav>
+    </aside>
+
+    <!-- Chatbot Section -->
+    <div class="chatbot-section">
+      <div class="chatbot-container">
+        <div class="chat-container">
+          <!-- Chat Header -->
+          <div class="chat-header">
+            <div class="header-content">
+              <div class="header-bot-icon">
+                <img src="/assets/images/google-gemini-icon.png" alt="Yuki" />
+              </div>
+              <div class="header-text">
+                <h2>Yuki AI Assistant</h2>
+                <p>Your personal career guide</p>
+              </div>
             </div>
-            <div class="message-content">
-              <div class="message-text">
-                Hello! 👋 I'm Yuki! Your AI Career Assistant. I can help you with career path guidance, resume tips, interview preparation, skill development, networking strategies, and work-life balance. What would you like to know about?
+            <button class="theme-toggle" id="theme-toggle" title="Toggle dark/light mode">
+              <i class="fas fa-moon"></i>
+            </button>
+          </div>
+
+          <!-- Chat Messages -->
+          <div class="chat-messages" id="chat-messages">
+            <div class="message bot-message">
+              <div class="bot-avatar">
+                <img src="/assets/images/google-gemini-icon.png" alt="Yuki" />
+              </div>
+              <div class="message-content">
+                <div class="message-text">
+                  Hello! 👋 I'm <strong>Yuki</strong>, your AI Career Assistant. I can help you with:
+                  <ul>
+                    <li>🎯 Career path guidance</li>
+                    <li>📄 Resume tips & optimization</li>
+                    <li>💼 Interview preparation</li>
+                    <li>🚀 Skill development advice</li>
+                    <li>🤝 Networking strategies</li>
+                    <li>⚖️ Work-life balance tips</li>
+                  </ul>
+                  What would you like to know about?
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="chat-input-container">
-          <div class="input-wrapper">
-            <input
-              type="text"
-              class="chat-input"
-              id="chat-input"
-              placeholder="Type your career question here..."
-              autocomplete="off"
-            />
-            <button class="chat-send" id="chat-send" title="Send message">
-              <i class="fas fa-paper-plane"></i>
-            </button>
-          </div>
-          <div class="input-footer">
-            <span class="disclaimer"
-              >AI responses may not always be accurate. Use discretion.</span
-            >
+
+          <!-- Chat Input -->
+          <div class="chat-input-container">
+            <div class="input-wrapper">
+              <input
+                type="text"
+                class="chat-input"
+                id="chat-input"
+                placeholder="Ask me anything about your career..."
+                autocomplete="off"
+              />
+              <button class="chat-send" id="chat-send" title="Send message">
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </div>
+            <div class="input-footer">
+              <span class="disclaimer">
+                <i class="fas fa-info-circle"></i>
+                AI responses may not always be accurate. Use discretion.
+              </span>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <script src="../js/chatbot.js"></script>
+    <!-- Google Translate -->
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: "en",
+            includedLanguages: "en,hi,ta,te,ml,bn,kn,mr,gu,pa",
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+          },
+          "google_translate_element"
+        );
+      }
+    </script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script>
+      document
+        .getElementById("translate-toggle")
+        .addEventListener("click", () => {
+          const translateBox = document.getElementById(
+            "google_translate_element"
+          );
+          const isHidden =
+            translateBox.style.display === "none" ||
+            !translateBox.style.display;
+          translateBox.style.display = isHidden ? "block" : "none";
+        });
+    </script>
+
+    <script src="/js/homepage-enhanced.js"></script>
+    <script src="/js/chatbot.js"></script>
   </body>
 </html>

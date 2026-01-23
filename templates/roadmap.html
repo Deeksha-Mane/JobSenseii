@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your 90-Day Roadmap - JobSensei</title>
+  <link rel="stylesheet" href="/css/homepage.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <style>
+    .roadmap-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .roadmap-header {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--card-border);
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .roadmap-header h1 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .roadmap-meta {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+
+    .meta-item i {
+      color: var(--accent);
+    }
+
+    .current-focus {
+      background: linear-gradient(135deg, var(--accent) 0%, #8b5cf6 100%);
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      color: white;
+      text-align: center;
+    }
+
+    .current-focus h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .current-focus p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    .phases-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .phase-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--card-border);
+      border-radius: 1rem;
+      padding: 2rem;
+    }
+
+    .phase-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--card-border);
+    }
+
+    .phase-number {
+      width: 50px;
+      height: 50px;
+      background: var(--accent);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .phase-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .weeks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .week-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--card-border);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .week-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px var(--shadow);
+      border-color: var(--accent);
+    }
+
+    .week-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .week-number {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .week-goal {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .week-section {
+      margin-bottom: 1rem;
+    }
+
+    .week-section h4 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .week-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .week-section li {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      padding: 0.35rem 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .week-section li::before {
+      content: "→";
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+      justify-content: center;
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 0.75rem;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .action-btn.primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .action-btn.primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    .action-btn.secondary {
+      background: transparent;
+      color: var(--text-primary);
+      border: 2px solid var(--card-border);
+    }
+
+    .action-btn.secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      .roadmap-meta {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .weeks-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+      }
+
+      .action-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <h2>JobSensei</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="/pages/homepage.html"><i class="fas fa-home"></i> Home</a>
+      <a href="/pages/dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+      <a href="/pages/profile.html"><i class="fas fa-user"></i> My Profile</a>
+      <a href="/my-roadmap" class="active"><i class="fas fa-map-marked-alt"></i> My Roadmap</a>
+      <a href="/pages/jobboard.html"><i class="fas fa-briefcase"></i> Jobs For You</a>
+      <a href="/pages/resumeintro.html"><i class="fas fa-file-alt"></i> Resume Builder</a>
+      <a href="/pages/chatbot.html"><i class="fas fa-robot"></i> Ask Yuki Bot</a>
+      <a href="/pages/connect.html"><i class="fas fa-users"></i> Connect</a>
+      <a href="/pages/saved-courses.html"><i class="fas fa-bookmark"></i> Saved Courses</a>
+    </nav>
+  </aside>
+
+  <main class="dashboard-main">
+    <div class="roadmap-container">
+    <!-- Header -->
+    <div class="roadmap-header">
+      <h1>🗺️ Your 90-Day Roadmap</h1>
+      <h2 style="font-size: 1.5rem; color: var(--accent); margin-top: 0.5rem;">{{ roadmap.path_name }}</h2>
+      <div class="roadmap-meta">
+        <div class="meta-item">
+          <i class="fas fa-calendar"></i>
+          <span>{{ roadmap.start_date }} to {{ roadmap.end_date }}</span>
+        </div>
+        <div class="meta-item">
+          <i class="fas fa-clock"></i>
+          <span>{{ roadmap.time_commitment }}</span>
+        </div>
+        <div class="meta-item">
+          <i class="fas fa-flag-checkered"></i>
+          <span>90 Days Total</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Current Focus -->
+    <div class="current-focus">
+      <h2>📍 Current Week Focus</h2>
+      <p>Week {{ roadmap.current_week.week }} - {{ roadmap.current_week.phase }}: {{ roadmap.current_week.focus }}</p>
+    </div>
+
+    <!-- Phases -->
+    <div class="phases-container">
+      {% for phase in roadmap.phases %}
+      <div class="phase-card">
+        <div class="phase-header">
+          <div class="phase-number">{{ loop.index }}</div>
+          <h3 class="phase-title">{{ phase.name }}</h3>
+        </div>
+        <div class="weeks-grid">
+          {% for week in phase.weeks %}
+          <div class="week-card">
+            <div class="week-header">
+              <span class="week-number">Week {{ week.week }}</span>
+            </div>
+            <h4 class="week-goal">{{ week.goal }}</h4>
+            
+            {% if week.skills %}
+            <div class="week-section">
+              <h4>Skills to Learn</h4>
+              <ul>
+                {% for skill in week.skills %}
+                <li>{{ skill }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+
+            {% if week.outcomes %}
+            <div class="week-section">
+              <h4>Deliverables</h4>
+              <ul>
+                {% for outcome in week.outcomes %}
+                <li>{{ outcome }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+
+            {% if week.resources %}
+            <div class="week-section">
+              <h4>Resources</h4>
+              <ul>
+                {% for resource in week.resources %}
+                <li>{{ resource }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <a href="/pages/dashboard.html" class="action-btn primary">
+        <i class="fas fa-th-large"></i>
+        <span>Go to Dashboard</span>
+      </a>
+      <a href="/pages/jobboard.html" class="action-btn secondary">
+        <i class="fas fa-briefcase"></i>
+        <span>Browse Jobs</span>
+      </a>
+      <a href="/pages/chatbot.html" class="action-btn secondary">
+        <i class="fas fa-robot"></i>
+        <span>Ask Yuki for Help</span>
+      </a>
+    </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h2>JobSensei</h2>
+        <p>Your AI-powered career companion</p>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/pages/homepage.html">Home</a></li>
+          <li><a href="/pages/about.html">About Us</a></li>
+          <li><a href="/pages/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact Us</h4>
+        <p><i class="fas fa-envelope"></i> support@jobsensei.com</p>
+        <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 JobSensei. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Connect - JobSensei</title>
-    <link rel="stylesheet" href="../css/dashboard.css" />
-    <link rel="stylesheet" href="../css/connect.css" />
+    <link rel="stylesheet" href="/css/homepage.css" />
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link rel="stylesheet" href="/css/connect.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -14,83 +15,166 @@
   <body>
     <!-- Sidebar -->
     <aside class="sidebar">
-      <h2>JobSensei</h2>
-      <a href="/pages/homepage.html">Home</a>
-      <a href="/pages/dashboard.html">Dashboard</a>
-      <a href="/pages/profile.html">My Profile</a>
-      <a href="/pages/jobboard.html">Jobs For You</a>
-      <a href="/templates/index.html">AI Career Guide</a>
-      <a href="/pages/resumeintro.html">Resume Builder</a>
-      <a href="/pages/chatbot.html">Ask Yuki Bot</a>
-      <a href="/pages/connect.html" class="active">Connect</a>
-      <a href="javascript:void(0);" id="translate-toggle" class="translate-btn"
-        >Change Language</a
-      >
+      <div class="sidebar-brand">
+        <img src="/assets/images/logo.svg" alt="JobSensei" class="sidebar-logo" />
+        <h2>JobSensei</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="/pages/homepage.html"><i class="fas fa-home"></i> Home</a>
+        <a href="/pages/dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+        <a href="/pages/profile.html"><i class="fas fa-user"></i> My Profile</a>
+        <a href="/pages/jobboard.html"><i class="fas fa-briefcase"></i> Jobs For You</a>
+        <a href="/career-guide"><i class="fas fa-compass"></i> AI Career Guide</a>
+        <a href="/pages/resumeintro.html"><i class="fas fa-file-alt"></i> Resume Builder</a>
+        <a href="/pages/chatbot.html"><i class="fas fa-robot"></i> Ask Yuki Bot</a>
+        <a href="/pages/connect.html" class="active"><i class="fas fa-users"></i> Connect</a>
+        <a href="/pages/saved-courses.html"><i class="fas fa-bookmark"></i> Saved Courses</a>
+        <a href="javascript:void(0);" id="translate-toggle" class="translate-btn">
+          <i class="fas fa-language"></i> Change Language
+        </a>
+      </nav>
       <div id="google_translate_element" style="display: none"></div>
     </aside>
 
     <!-- Main Content -->
-    <main class="main-content">
-      <div class="header">
-        <h2>Connect with Professionals</h2>
-        <button id="theme-toggle" class="theme-toggle" title="Toggle Theme">
-          <i class="fas fa-moon"></i>
-        </button>
-        <button class="logout-btn" id="logoutBtn" onclick="logout()">
-          Logout
-        </button>
-      </div>
+    <main class="dashboard-main">
+      <div class="dashboard-container">
+        <!-- Header -->
+        <div class="dashboard-header">
+          <div class="welcome-section">
+            <h1><i class="fas fa-users"></i> Connect with Professionals</h1>
+            <p>Join our mentorship community and grow your career</p>
+          </div>
+          <div class="quick-actions">
+            <button id="theme-toggle" class="action-btn" title="Toggle Theme">
+              <i class="fas fa-moon"></i> Theme
+            </button>
+            <button class="logout-btn" id="logoutBtn">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+          </div>
+        </div>
 
-      <div class="connect-container">
+        <!-- Hero Section -->
+        <div class="connect-hero">
+          <div class="hero-badge">
+            <i class="fas fa-star"></i>
+            <span>Join 1000+ Professionals</span>
+          </div>
+          <h2>Build Meaningful Connections</h2>
+          <p>Whether you're looking to share your expertise or learn from experienced professionals, our platform connects you with the right people.</p>
+        </div>
+
+        <!-- Connect Options -->
         <div class="connect-options">
-          <div class="card mentor-option">
+          <div class="option-card mentor-card">
             <div class="option-icon">
               <i class="fas fa-user-tie"></i>
             </div>
+            <div class="option-badge">For Experts</div>
             <h3>Join as Mentor</h3>
             <p>Share your expertise and help others grow in their careers</p>
             <ul class="benefits-list">
-              <li>
-                <i class="fas fa-check"></i> Build your professional network
-              </li>
-              <li>
-                <i class="fas fa-check"></i> Enhance your leadership skills
-              </li>
-              <li><i class="fas fa-check"></i> Give back to the community</li>
+              <li><i class="fas fa-check-circle"></i> Build your professional network</li>
+              <li><i class="fas fa-check-circle"></i> Enhance your leadership skills</li>
+              <li><i class="fas fa-check-circle"></i> Give back to the community</li>
+              <li><i class="fas fa-check-circle"></i> Flexible scheduling options</li>
             </ul>
-            <button
-              class="btn-primary"
-              onclick="window.location.href='mentor-dashboard.html'"
-            >
-              Join as Mentor
+            <button class="option-btn mentor-btn" onclick="window.location.href='/pages/mentor-dashboard.html'">
+              <span>Join as Mentor</span>
+              <i class="fas fa-arrow-right"></i>
             </button>
           </div>
 
-          <div class="card mentee-option">
+          <div class="option-card mentee-card">
             <div class="option-icon">
               <i class="fas fa-user-graduate"></i>
             </div>
+            <div class="option-badge">For Learners</div>
             <h3>Join as Mentee</h3>
             <p>Get guidance from experienced professionals</p>
             <ul class="benefits-list">
-              <li><i class="fas fa-check"></i> Personalized career guidance</li>
-              <li><i class="fas fa-check"></i> Industry insights and advice</li>
-              <li><i class="fas fa-check"></i> Professional development</li>
+              <li><i class="fas fa-check-circle"></i> Personalized career guidance</li>
+              <li><i class="fas fa-check-circle"></i> Industry insights and advice</li>
+              <li><i class="fas fa-check-circle"></i> Professional development</li>
+              <li><i class="fas fa-check-circle"></i> One-on-one mentorship sessions</li>
             </ul>
-            <button
-              class="btn-primary"
-              onclick="window.location.href='mentee-dashboard.html'"
-            >
-              Join as Mentee
+            <button class="option-btn mentee-btn" onclick="window.location.href='/pages/mentee-dashboard.html'">
+              <span>Join as Mentee</span>
+              <i class="fas fa-arrow-right"></i>
             </button>
           </div>
         </div>
 
-        <div class="already-member">
-          <p>Already a member? <a href="login.html">Sign in</a></p>
+        <!-- Features Section -->
+        <div class="features-section">
+          <h3><i class="fas fa-sparkles"></i> Why Choose Our Platform?</h3>
+          <div class="features-grid">
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <h4>Verified Profiles</h4>
+              <p>All mentors are verified professionals with proven expertise</p>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-calendar-check"></i>
+              </div>
+              <h4>Flexible Scheduling</h4>
+              <p>Book sessions at your convenience with easy scheduling</p>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-comments"></i>
+              </div>
+              <h4>Real-time Chat</h4>
+              <p>Stay connected with instant messaging and video calls</p>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <h4>Track Progress</h4>
+              <p>Monitor your growth with detailed progress tracking</p>
+            </div>
+          </div>
         </div>
       </div>
     </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <h2>JobSensei</h2>
+          <p>Your AI-powered career companion</p>
+          <p>Empowering careers through mentorship and guidance</p>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="/pages/homepage.html">Home</a></li>
+            <li><a href="/pages/about.html">About Us</a></li>
+            <li><a href="/pages/contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contact Us</h4>
+          <p><i class="fas fa-envelope"></i> support@jobsensei.com</p>
+          <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+          <div class="footer-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 JobSensei. All rights reserved.</p>
+      </div>
+    </footer>
 
     <script type="text/javascript">
       function googleTranslateElementInit() {
@@ -105,17 +189,38 @@
       }
     </script>
     <script>
-      document
-        .getElementById("translate-toggle")
-        .addEventListener("click", () => {
-          const translateBox = document.getElementById(
-            "google_translate_element"
-          );
-          const isHidden =
-            translateBox.style.display === "none" ||
-            !translateBox.style.display;
-          translateBox.style.display = isHidden ? "block" : "none";
-        });
+      document.getElementById("translate-toggle").addEventListener("click", () => {
+        const translateBox = document.getElementById("google_translate_element");
+        const isHidden = translateBox.style.display === "none" || !translateBox.style.display;
+        translateBox.style.display = isHidden ? "block" : "none";
+      });
+
+      // Theme Toggle
+      const themeToggle = document.getElementById("theme-toggle");
+      const body = document.body;
+      const themeIcon = themeToggle.querySelector("i");
+
+      const savedTheme = localStorage.getItem("theme") || "dark";
+      if (savedTheme === "light") {
+        body.classList.add("light-mode");
+        themeIcon.classList.replace("fa-moon", "fa-sun");
+      }
+
+      themeToggle.addEventListener("click", () => {
+        body.classList.toggle("light-mode");
+        const isLight = body.classList.contains("light-mode");
+        themeIcon.classList.toggle("fa-moon", !isLight);
+        themeIcon.classList.toggle("fa-sun", isLight);
+        localStorage.setItem("theme", isLight ? "light" : "dark");
+      });
+
+      // Logout
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        if (confirm("Are you sure you want to logout?")) {
+          localStorage.clear();
+          window.location.href = "/pages/login.html";
+        }
+      });
     </script>
     <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   </body>

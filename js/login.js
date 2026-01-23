@@ -1,7 +1,10 @@
 // login.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js"; // import doc, getDoc properly
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+// Import Firebase configuration from centralized config
+import { firebaseConfig } from './config.js';
 
 // Theme Toggle Implementation
 document.addEventListener('DOMContentLoaded', function() {
@@ -26,17 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     themeToggleBtn.addEventListener('click', toggleTheme);
 });
-
-// Firebase Configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyBX15nrkN6mqZW09HOtneFVj6O0krWuw4I",
-    authDomain: "jobsensei-84540.firebaseapp.com",
-    projectId: "jobsensei-84540",
-    storageBucket: "jobsensei-84540.appspot.com",
-    messagingSenderId: "293854344933",
-    appId: "1:293854344933:web:227ce709e4dfdf7bc2460c",
-    measurementId: "G-VHGEZ3Y68H",
-};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

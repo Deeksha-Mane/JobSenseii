@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Career Path - JobSensei</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+    :root {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --text-primary: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --accent-light: rgba(59, 130, 246, 0.1);
+      --card-bg: rgba(30, 41, 59, 0.5);
+      --card-border: rgba(148, 163, 184, 0.1);
+      --shadow: rgba(0, 0, 0, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .sidebar {
+      width: 260px;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border-right: 1px solid var(--card-border);
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      padding: 1.25rem 0;
+      overflow-y: auto;
+      z-index: 1000;
+    }
+
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0 1.5rem 1rem;
+      border-bottom: 1px solid var(--card-border);
+      margin-bottom: 1rem;
+    }
+
+    .sidebar-brand h2 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      padding: 0 0.75rem;
+    }
+
+    .sidebar-nav a {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.65rem 0.85rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-radius: 0.65rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      font-size: 0.875rem;
+    }
+
+    .sidebar-nav a:hover {
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+
+    .sidebar-nav a.active {
+      background: var(--accent);
+      color: white;
+    }
+
+    .dashboard-main {
+      margin-left: 260px;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .recommendation-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .diagnosis-section {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .diagnosis-section h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .diagnosis-text {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .paths-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .path-card {
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
+      border-radius: 1rem;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .path-card.primary {
+      border-color: var(--accent);
+      box-shadow: 0 8px 30px rgba(59, 130, 246, 0.2);
+    }
+
+    .path-badge {
+      position: absolute;
+      top: -12px;
+      left: 2rem;
+      padding: 0.4rem 1rem;
+      border-radius: 2rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .path-badge.primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .path-badge.secondary {
+      background: #8b5cf6;
+      color: white;
+    }
+
+    .path-name {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin: 1rem 0 0.75rem;
+    }
+
+    .compatibility-score {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--accent-light);
+      color: var(--accent);
+      border-radius: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .path-rationale {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .outcomes-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .outcome-tag {
+      padding: 0.4rem 0.85rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--card-border);
+      border-radius: 2rem;
+      font-size: 0.85rem;
+      color: var(--text-primary);
+    }
+
+    .choose-btn {
+      width: 100%;
+      padding: 1rem;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 0.75rem;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .choose-btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    .commitment-notice {
+      background: rgba(251, 191, 36, 0.1);
+      border: 2px solid rgba(251, 191, 36, 0.3);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .commitment-notice h3 {
+      color: #fbbf24;
+      margin-bottom: 0.75rem;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+      .dashboard-main {
+        margin-left: 0;
+      }
+      .paths-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <h2>JobSensei</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="/pages/homepage.html"><i class="fas fa-home"></i> Home</a>
+      <a href="/pages/dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+      <a href="/career-guide" class="active"><i class="fas fa-compass"></i> AI Career Guide</a>
+      <a href="/pages/jobboard.html"><i class="fas fa-briefcase"></i> Jobs</a>
+    </nav>
+  </aside>
+
+  <main class="dashboard-main">
+    <div class="recommendation-container">
+    {% if error %}
+    <div class="diagnosis-section">
+      <h1>⚠️ Error</h1>
+      <p class="diagnosis-text">{{ error }}</p>
+      <a href="/career-guide" style="display: inline-block; margin-top: 1.5rem; padding: 0.75rem 2rem; background: var(--accent); color: white; text-decoration: none; border-radius: 0.5rem;">Try Again</a>
+    </div>
+    {% else %}
+    <div class="diagnosis-section">
+      <h1>🎯 Your Career Diagnosis</h1>
+      <p class="diagnosis-text">{{ result.diagnosis_summary }}</p>
+    </div>
+
+    <div class="commitment-notice">
+      <h3><i class="fas fa-exclamation-triangle"></i> 90-Day Commitment Required</h3>
+      <p style="color: var(--text-secondary);">Choose wisely. You cannot switch paths randomly.</p>
+    </div>
+
+    <div class="paths-container">
+      <div class="path-card primary">
+        <div class="path-badge primary">⭐ Recommended</div>
+        <h2 class="path-name">{{ result.primary_path.name }}</h2>
+        <div class="compatibility-score">
+          <i class="fas fa-chart-line"></i>
+          <span>{{ result.primary_path.score }}% Match</span>
+        </div>
+        <p class="path-rationale">{{ result.primary_path.rationale }}</p>
+        <div class="outcomes-list">
+          {% for outcome in result.primary_path.outcomes %}
+          <span class="outcome-tag">{{ outcome }}</span>
+          {% endfor %}
+        </div>
+        <form method="POST" action="/commit-path">
+          <input type="hidden" name="chosen_path" value="primary">
+          <button type="submit" class="choose-btn">
+            <i class="fas fa-check-circle"></i> Commit to This Path
+          </button>
+        </form>
+      </div>
+
+      <div class="path-card">
+        <div class="path-badge secondary">Fallback Option</div>
+        <h2 class="path-name">{{ result.secondary_path.name }}</h2>
+        <div class="compatibility-score">
+          <i class="fas fa-chart-line"></i>
+          <span>{{ result.secondary_path.score }}% Match</span>
+        </div>
+        <p class="path-rationale">{{ result.secondary_path.rationale }}</p>
+        <div class="outcomes-list">
+          {% for outcome in result.secondary_path.outcomes %}
+          <span class="outcome-tag">{{ outcome }}</span>
+          {% endfor %}
+        </div>
+        <form method="POST" action="/commit-path">
+          <input type="hidden" name="chosen_path" value="secondary">
+          <button type="submit" class="choose-btn" style="background: #8b5cf6;">
+            <i class="fas fa-check-circle"></i> Commit to This Path
+          </button>
+        </form>
+      </div>
+    </div>
+    {% endif %}
+    </div>
+  </main>
+</body>
+</html>

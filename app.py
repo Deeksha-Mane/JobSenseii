@@ -201,15 +201,35 @@ def commit_path():
 
 @app.route('/my-roadmap')
 def my_roadmap():
-    """View current roadmap"""
+    """View current roadmap (redirect to specific path)"""
     commitment = session.get('active_career_path')
     
     if not commitment:
         return redirect(url_for('career_guide'))
     
-    # Get visual roadmap data
     path_key = commitment.get('path_key')
+    return redirect(url_for('view_roadmap', path_key=path_key))
+
+@app.route('/my-roadmaps')
+def my_roadmaps():
+    """View all user's roadmaps"""
+    return render_template('my_roadmaps.html')
+
+@app.route('/view-roadmap/<path_key>')
+def view_roadmap(path_key):
+    """View specific roadmap by path key"""
     roadmap_data = get_roadmap(path_key)
+    
+    if not roadmap_data or not roadmap_data.get('nodes'):
+        return redirect(url_for('career_guide'))
+    
+    # Create or get commitment for this path
+    commitment = {
+        'path_key': path_key,
+        'path_name': roadmap_data.get('name', 'Career Path'),
+        'current_week': 1,
+        'current_phase': 'Foundation'
+    }
     
     return render_template('roadmap_visual.html', 
                          roadmap_data=roadmap_data,

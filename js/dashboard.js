@@ -164,6 +164,10 @@ onAuthStateChanged(auth, async (user) => {
         // Update progress bars without user data
         updateProgressBars();
       }
+      
+      // Load roadmap count
+      await loadRoadmapCount(user.uid);
+      
     } catch (error) {
       console.error("Error fetching user data:", error);
       updateProgressBars();
@@ -172,6 +176,25 @@ onAuthStateChanged(auth, async (user) => {
     window.location.href = "login.html";
   }
 });
+
+// Load roadmap count
+async function loadRoadmapCount(userId) {
+  try {
+    const progressRef = doc(db, 'roadmapProgress', userId);
+    const progressSnap = await getDoc(progressRef);
+    
+    if (progressSnap.exists()) {
+      const data = progressSnap.data();
+      const count = Object.keys(data).length;
+      const countElement = document.getElementById('roadmap-count');
+      if (countElement) {
+        countElement.textContent = count;
+      }
+    }
+  } catch (error) {
+    console.error('Error loading roadmap count:', error);
+  }
+}
 
 // Logout
 document.getElementById("logoutBtn").addEventListener("click", () => {

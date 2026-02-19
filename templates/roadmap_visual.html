@@ -8,6 +8,23 @@
   <link rel="stylesheet" href="/css/dashboard.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <style>
+    body.light-mode {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-light: rgba(37, 99, 235, 0.1);
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --card-border: rgba(148, 163, 184, 0.2);
+      --shadow: rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
     .roadmap-container {
       max-width: 1600px;
       margin: 0 auto;
@@ -20,7 +37,16 @@
       border-radius: 1rem;
       padding: 2rem;
       margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .roadmap-header-content {
       text-align: center;
+      flex: 1;
     }
 
     .roadmap-header h1 {
@@ -33,6 +59,27 @@
     .roadmap-header p {
       font-size: 1.1rem;
       color: var(--text-secondary);
+    }
+
+    .theme-toggle-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      background: var(--accent-light);
+      border: 1px solid var(--card-border);
+      border-radius: 0.5rem;
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle-btn:hover {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
     }
 
     /* Progress Stats */
@@ -316,8 +363,14 @@
     <div class="roadmap-container">
       <!-- Header -->
       <div class="roadmap-header">
-        <h1>🗺️ {{ roadmap_data.name }} Roadmap</h1>
-        <p>{{ roadmap_data.description }}</p>
+        <div class="roadmap-header-content">
+          <h1>🗺️ {{ roadmap_data.name }} Roadmap</h1>
+          <p>{{ roadmap_data.description }}</p>
+        </div>
+        <button id="theme-toggle" class="theme-toggle-btn">
+          <i class="fas fa-moon"></i>
+          <span>Dark Mode</span>
+        </button>
       </div>
 
       <!-- Progress Stats -->
@@ -417,6 +470,10 @@
       }
     });
 
+    // Get current path key from commitment
+    const commitment = {{ commitment|tojson }};
+    const currentPathKey = commitment.path_key;
+
     // Load progress
     async function loadProgress() {
       try {
@@ -425,7 +482,9 @@
         
         if (progressSnap.exists()) {
           const data = progressSnap.data();
-          completedNodes = new Set(data.completedNodes || []);
+          // Load progress for current path only
+          const pathProgress = data[currentPathKey] || {};
+          completedNodes = new Set(pathProgress.completedNodes || []);
         }
         
         renderRoadmap();
@@ -440,9 +499,14 @@
     async function saveProgress() {
       try {
         const progressRef = doc(db, 'roadmapProgress', currentUser.uid);
+        
+        // Save progress per career path
         await setDoc(progressRef, {
-          completedNodes: Array.from(completedNodes),
-          lastUpdated: new Date().toISOString()
+          [currentPathKey]: {
+            completedNodes: Array.from(completedNodes),
+            lastUpdated: new Date().toISOString(),
+            pathName: roadmapData.name
+          }
         }, { merge: true });
       } catch (error) {
         console.error('Error saving progress:', error);
@@ -453,6 +517,25 @@
     function renderRoadmap() {
       const svg = document.getElementById('roadmapSvg');
       const nodes = roadmapData.nodes;
+      
+      // Clear existing content
+      svg.innerHTML = '';
+      
+      // Add arrow marker definition
+      const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+      const marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
+      marker.setAttribute('id', 'arrowhead');
+      marker.setAttribute('markerWidth', '10');
+      marker.setAttribute('markerHeight', '10');
+      marker.setAttribute('refX', '9');
+      marker.setAttribute('refY', '3');
+      marker.setAttribute('orient', 'auto');
+      const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+      polygon.setAttribute('points', '0 0, 10 3, 0 6');
+      polygon.setAttribute('fill', 'var(--card-border)');
+      marker.appendChild(polygon);
+      defs.appendChild(marker);
+      svg.appendChild(defs);
       
       // Draw connections first (so they appear behind nodes)
       nodes.forEach(node => {
@@ -589,6 +672,42 @@
       document.getElementById('totalNodes').textContent = total;
       document.getElementById('progressPercent').textContent = `${percent}%`;
     }
+  </script>
+
+  <script>
+    // Theme Toggle
+    document.addEventListener('DOMContentLoaded', function() {
+      const themeToggle = document.getElementById('theme-toggle');
+      const body = document.body;
+      
+      if (!themeToggle) return;
+      
+      // Load saved theme
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      if (savedTheme === 'light') {
+        body.classList.add('light-mode');
+        updateThemeButton(true);
+      }
+      
+      themeToggle.addEventListener('click', () => {
+        body.classList.toggle('light-mode');
+        const isLight = body.classList.contains('light-mode');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        updateThemeButton(isLight);
+      });
+      
+      function updateThemeButton(isLight) {
+        const icon = themeToggle.querySelector('i');
+        const text = themeToggle.querySelector('span');
+        if (isLight) {
+          icon.className = 'fas fa-sun';
+          text.textContent = 'Light Mode';
+        } else {
+          icon.className = 'fas fa-moon';
+          text.textContent = 'Dark Mode';
+        }
+      }
+    });
   </script>
 </body>
 </html>

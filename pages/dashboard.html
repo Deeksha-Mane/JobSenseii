@@ -32,6 +32,7 @@
         <a href="/pages/profile.html"><i class="fas fa-user"></i> My Profile</a>
         <a href="/pages/jobboard.html"><i class="fas fa-briefcase"></i> Jobs For You</a>
         <a href="/career-guide"><i class="fas fa-robot"></i> AI Career Guide</a>
+        <a href="/my-roadmaps"><i class="fas fa-map"></i> My Roadmaps</a>
         <a href="/pages/resumeintro.html"><i class="fas fa-file-alt"></i> Resume Builder</a>
         <a href="/pages/chatbot.html"><i class="fas fa-comments"></i> Ask Yuki Bot</a>
         <a href="/pages/connect.html"><i class="fas fa-users"></i> Connect</a>
@@ -69,9 +70,20 @@
 
         <!-- Stats Cards -->
         <div class="stats-grid">
-          <div class="stat-card">
+          <div class="stat-card" style="cursor: pointer;" onclick="window.location.href='/my-roadmaps'">
             <div class="stat-icon" style="background: rgba(59, 130, 246, 0.1);">
-              <i class="fas fa-briefcase" style="color: #3b82f6;"></i>
+              <i class="fas fa-map" style="color: #3b82f6;"></i>
+            </div>
+            <div class="stat-content">
+              <h3>My Roadmaps</h3>
+              <p class="stat-number" id="roadmap-count">0</p>
+              <small style="color: var(--text-secondary); font-size: 0.85rem;">Active career paths</small>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1);">
+              <i class="fas fa-briefcase" style="color: #10b981;"></i>
             </div>
             <div class="stat-content">
               <h3>Jobs Applied</h3>
@@ -90,8 +102,8 @@
           </div>
 
           <div class="stat-card">
-            <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1);">
-              <i class="fas fa-chart-line" style="color: #10b981;"></i>
+            <div class="stat-icon" style="background: rgba(251, 191, 36, 0.1);">
+              <i class="fas fa-chart-line" style="color: #fbbf24;"></i>
             </div>
             <div class="stat-content">
               <h3>Profile</h3>

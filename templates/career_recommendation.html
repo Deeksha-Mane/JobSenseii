@@ -21,6 +21,19 @@
       --shadow: rgba(0, 0, 0, 0.3);
     }
 
+    body.light-mode {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-light: rgba(37, 99, 235, 0.1);
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --card-border: rgba(148, 163, 184, 0.2);
+      --shadow: rgba(0, 0, 0, 0.1);
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -32,6 +45,7 @@
       background: var(--bg-primary);
       color: var(--text-secondary);
       line-height: 1.6;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
     .sidebar {
@@ -261,11 +275,20 @@
     <div class="sidebar-brand">
       <h2>JobSensei</h2>
     </div>
-    <nav class="sidebar-nav">
-      <a href="/pages/homepage.html"><i class="fas fa-home"></i> Home</a>
-      <a href="/pages/dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
-      <a href="/career-guide" class="active"><i class="fas fa-compass"></i> AI Career Guide</a>
-      <a href="/pages/jobboard.html"><i class="fas fa-briefcase"></i> Jobs</a>
+    <nav class="sidebar-nav" style="display: flex; flex-direction: column; height: calc(100vh - 100px);">
+      <div style="flex: 1;">
+        <a href="/pages/homepage.html"><i class="fas fa-home"></i> Home</a>
+        <a href="/pages/dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+        <a href="/career-guide" class="active"><i class="fas fa-compass"></i> AI Career Guide</a>
+        <a href="/my-roadmaps"><i class="fas fa-map"></i> My Roadmaps</a>
+        <a href="/pages/jobboard.html"><i class="fas fa-briefcase"></i> Jobs</a>
+      </div>
+      
+      <!-- Theme Toggle -->
+      <button id="theme-toggle" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; background: var(--accent-light); border: 1px solid var(--card-border); border-radius: 0.5rem; color: var(--text-primary); cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease; margin-top: 1rem;">
+        <i class="fas fa-moon"></i>
+        <span>Dark Mode</span>
+      </button>
     </nav>
   </aside>
 
@@ -331,8 +354,58 @@
         </form>
       </div>
     </div>
+    
+    <!-- View All Roadmaps Link -->
+    <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 1rem;">
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        Already have roadmaps? View your progress across all career paths
+      </p>
+      <a href="/my-roadmaps" style="display: inline-block; padding: 0.75rem 1.5rem; background: var(--bg-secondary); color: var(--text-primary); border: 1px solid var(--card-border); border-radius: 0.5rem; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">
+        <i class="fas fa-map"></i> View All My Roadmaps
+      </a>
+    </div>
+    
     {% endif %}
     </div>
   </main>
+
+  <script>
+    // Theme Toggle
+    document.addEventListener('DOMContentLoaded', function() {
+      const themeToggle = document.getElementById('theme-toggle');
+      const body = document.body;
+      
+      if (!themeToggle) {
+        console.error('Theme toggle button not found');
+        return;
+      }
+      
+      // Load saved theme
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      if (savedTheme === 'light') {
+        body.classList.add('light-mode');
+        updateThemeButton(true);
+      }
+      
+      themeToggle.addEventListener('click', () => {
+        body.classList.toggle('light-mode');
+        const isLight = body.classList.contains('light-mode');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        updateThemeButton(isLight);
+      });
+      
+      function updateThemeButton(isLight) {
+        const icon = themeToggle.querySelector('i');
+        const text = themeToggle.querySelector('span');
+        if (isLight) {
+          icon.className = 'fas fa-sun';
+          text.textContent = 'Light Mode';
+        } else {
+          icon.className = 'fas fa-moon';
+          text.textContent = 'Dark Mode';
+        }
+      }
+    });
+  </script>
 </body>
 </html>

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Roadmaps - JobSensei</title>
+  <link rel="stylesheet" href="/css/homepage.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <style>
+    body.light-mode {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-light: rgba(37, 99, 235, 0.1);
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --card-border: rgba(148, 163, 184, 0.2);
+      --shadow: rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .roadmaps-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .page-header {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .page-header-content {
+      text-align: center;
+      flex: 1;
+    }
+
+    .page-header h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .page-header p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+    }
+
+    .theme-toggle-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      background: var(--accent-light);
+      border: 1px solid var(--card-border);
+      border-radius: 0.5rem;
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle-btn:hover {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    .roadmaps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .roadmap-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .roadmap-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+    }
+
+    .roadmap-card.active {
+      border-color: var(--accent);
+      background: rgba(59, 130, 246, 0.05);
+    }
+
+    .roadmap-header-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .roadmap-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .roadmap-badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .roadmap-badge.active {
+      background: rgba(16, 185, 129, 0.2);
+      color: #10b981;
+    }
+
+    .roadmap-badge.paused {
+      background: rgba(251, 191, 36, 0.2);
+      color: #fbbf24;
+    }
+
+    .roadmap-progress {
+      margin: 1rem 0;
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 8px;
+      background: var(--bg-secondary);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), #10b981);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+
+    .progress-text {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .roadmap-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .stat-item i {
+      color: var(--accent);
+    }
+
+    .roadmap-actions {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #2563eb;
+    }
+
+    .btn-secondary {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      border: 1px solid var(--card-border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 1rem;
+    }
+
+    .empty-state i {
+      font-size: 4rem;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+
+    .empty-state h2 {
+      font-size: 1.5rem;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .empty-state p {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-large {
+      padding: 1rem 2rem;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="roadmaps-container">
+    <div class="page-header">
+      <div class="page-header-content">
+        <h1>My Career Roadmaps</h1>
+        <p>Track your progress across multiple career paths</p>
+      </div>
+      <button id="theme-toggle" class="theme-toggle-btn">
+        <i class="fas fa-moon"></i>
+        <span>Dark Mode</span>
+      </button>
+    </div>
+
+    <div id="roadmapsGrid" class="roadmaps-grid">
+      <!-- Roadmaps will be loaded here -->
+    </div>
+
+    <div id="emptyState" class="empty-state" style="display: none;">
+      <i class="fas fa-map"></i>
+      <h2>No Roadmaps Yet</h2>
+      <p>Take the career assessment to get your personalized roadmap</p>
+      <a href="/career-guide" class="btn btn-primary btn-large">
+        <i class="fas fa-compass"></i> Start Career Assessment
+      </a>
+    </div>
+  </div>
+
+  <script type="module">
+    import { firebaseConfig } from '/js/config.js';
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+    import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+    import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    let currentUser = null;
+
+    const careerPaths = {
+      'frontend_internship': 'Frontend Development',
+      'backend_dsa': 'Backend + DSA',
+      'data_analyst': 'Data Analyst',
+      'fullstack_web': 'Full Stack Web Development',
+      'ui_ux_design': 'UI/UX Design',
+      'digital_marketing': 'Digital Marketing'
+    };
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        currentUser = user;
+        loadRoadmaps();
+      } else {
+        window.location.href = '/pages/login.html';
+      }
+    });
+
+    async function loadRoadmaps() {
+      try {
+        console.log('Loading roadmaps for user:', currentUser.uid);
+        const progressRef = doc(db, 'roadmapProgress', currentUser.uid);
+        const progressSnap = await getDoc(progressRef);
+
+        console.log('Progress snapshot exists:', progressSnap.exists());
+        
+        if (!progressSnap.exists()) {
+          console.log('No progress document found');
+          document.getElementById('emptyState').style.display = 'block';
+          document.getElementById('roadmapsGrid').style.display = 'none';
+          return;
+        }
+
+        const allProgress = progressSnap.data();
+        console.log('All progress data:', allProgress);
+        
+        // Filter out non-path data
+        const validPaths = Object.keys(allProgress).filter(key => careerPaths[key]);
+        console.log('Valid paths found:', validPaths);
+        
+        if (validPaths.length === 0) {
+          console.log('No valid career paths found');
+          document.getElementById('emptyState').style.display = 'block';
+          document.getElementById('roadmapsGrid').style.display = 'none';
+          return;
+        }
+
+        const roadmapsGrid = document.getElementById('roadmapsGrid');
+        roadmapsGrid.innerHTML = '';
+        document.getElementById('emptyState').style.display = 'none';
+        document.getElementById('roadmapsGrid').style.display = 'grid';
+
+        // Get total nodes for each path
+        const pathNodeCounts = {
+          'frontend_internship': 31,
+          'backend_dsa': 24,
+          'data_analyst': 22,
+          'fullstack_web': 22,
+          'ui_ux_design': 23,
+          'digital_marketing': 24
+        };
+
+        for (const pathKey of validPaths) {
+          const progress = allProgress[pathKey];
+          
+          // Handle both old and new data formats
+          let completed = 0;
+          let lastUpdated = 'Never';
+          
+          if (progress && typeof progress === 'object') {
+            completed = progress.completedNodes?.length || 0;
+            if (progress.lastUpdated) {
+              lastUpdated = new Date(progress.lastUpdated).toLocaleDateString();
+            }
+          }
+          
+          const total = pathNodeCounts[pathKey] || 25;
+          const percentage = Math.round((completed / total) * 100);
+
+          console.log(`Creating card for ${pathKey}: ${completed}/${total} (${percentage}%)`);
+
+          const card = document.createElement('div');
+          card.className = 'roadmap-card';
+          card.innerHTML = `
+            <div class="roadmap-header-card">
+              <div>
+                <div class="roadmap-title">${careerPaths[pathKey]}</div>
+                <div style="font-size: 0.85rem; color: var(--text-secondary);">
+                  Last updated: ${lastUpdated}
+                </div>
+              </div>
+              <span class="roadmap-badge ${percentage > 0 ? 'active' : 'paused'}">
+                ${percentage > 0 ? 'In Progress' : 'Not Started'}
+              </span>
+            </div>
+
+            <div class="roadmap-progress">
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" style="width: ${percentage}%"></div>
+              </div>
+              <div class="progress-text">
+                <span>${completed} / ${total} topics</span>
+                <span>${percentage}%</span>
+              </div>
+            </div>
+
+            <div class="roadmap-stats">
+              <div class="stat-item">
+                <i class="fas fa-check-circle"></i>
+                <span>${completed} completed</span>
+              </div>
+              <div class="stat-item">
+                <i class="fas fa-clock"></i>
+                <span>${total - completed} remaining</span>
+              </div>
+            </div>
+
+            <div class="roadmap-actions">
+              <a href="/view-roadmap/${pathKey}" class="btn btn-primary">
+                <i class="fas fa-map"></i> View Roadmap
+              </a>
+              <button class="btn btn-secondary" onclick="shareProgress('${pathKey}', ${percentage})">
+                <i class="fas fa-share"></i> Share
+              </button>
+            </div>
+          `;
+
+          roadmapsGrid.appendChild(card);
+        }
+
+        console.log('Roadmaps loaded successfully');
+
+      } catch (error) {
+        console.error('Error loading roadmaps:', error);
+        document.getElementById('emptyState').style.display = 'block';
+        document.getElementById('roadmapsGrid').style.display = 'none';
+      }
+    }
+
+    window.shareProgress = function(pathKey, percentage) {
+      const pathName = careerPaths[pathKey];
+      const text = `I'm ${percentage}% through my ${pathName} roadmap on JobSensei! 🚀`;
+      
+      if (navigator.share) {
+        navigator.share({
+          title: 'My Career Progress',
+          text: text,
+          url: window.location.origin
+        });
+      } else {
+        navigator.clipboard.writeText(text);
+        alert('Progress copied to clipboard!');
+      }
+    };
+  </script>
+
+  <script>
+    // Theme Toggle
+    document.addEventListener('DOMContentLoaded', function() {
+      const themeToggle = document.getElementById('theme-toggle');
+      const body = document.body;
+      
+      if (!themeToggle) return;
+      
+      // Load saved theme
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      if (savedTheme === 'light') {
+        body.classList.add('light-mode');
+        updateThemeButton(true);
+      }
+      
+      themeToggle.addEventListener('click', () => {
+        body.classList.toggle('light-mode');
+        const isLight = body.classList.contains('light-mode');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        updateThemeButton(isLight);
+      });
+      
+      function updateThemeButton(isLight) {
+        const icon = themeToggle.querySelector('i');
+        const text = themeToggle.querySelector('span');
+        if (isLight) {
+          icon.className = 'fas fa-sun';
+          text.textContent = 'Light Mode';
+        } else {
+          icon.className = 'fas fa-moon';
+          text.textContent = 'Dark Mode';
+        }
+      }
+    });
+  </script>
+</body>
+</html>
